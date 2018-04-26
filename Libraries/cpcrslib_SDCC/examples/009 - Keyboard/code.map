@@ -1,0 +1,136 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           keyboard
+     00000000  l__BSS                          
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__DATA                         
+     00000000  l__GSINIT                       
+     00000000  l__HEADER                       
+     00000000  l__HEAP                         
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000000  s__HEADER                       
+     00000000  s__HEADER0                      
+     00000000  s__HEADER1                      
+     00000001  l__GSFINAL                      
+     00000003  l__HEADER0                      
+     00000009  l__HEADER1                      
+     00000318  l__CODE                         
+     00006038  s__CODE                         
+     00006350  s__DATA                         
+     00006350  s__GSFINAL                      
+     00006350  s__GSINIT                       
+     00006350  s__HOME                         
+     00006350  s__INITIALIZED                  
+     00006351  s__BSS                          
+     00006351  s__HEAP                         
+     00006351  s__INITIALIZER                  
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00006038    00000318 =         792. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00006038  _wait                              code
+     0000603E  _main                              code
+     000061FE  __clock                            crt0
+     000061FF  _exit                              crt0
+     00006200  _putchar                           
+     00006200  _putchar_rr_s                      
+     00006209  _putchar_rr_dbs                    
+     0000620E  _cpc_AssignKey                     keyboard
+     0000622B  _cpc_TestKeyboard                  keyboard
+     0000624F  linea                              keyboard
+     00006250  bte                                keyboard
+     00006251  keymap                             keyboard
+     0000625B  tecla_0                            keyboard
+     0000625D  tabla_teclas                       keyboard
+     0000627E  _cpc_AnyKeyPressed                 keyboard
+     000062AD  _cpc_SetModo                       video
+     000062B1  _cpc_PrintStr                      utils
+     000062C5  _cpc_TestKey                       keyboard
+     000062DF  _cpc_SetBorder                     video
+     000062E4  _cpc_RedefineKey                   keyboard
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSINIT                             00006350    00000000 =           0. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00006350  gsinit                             crt0
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSFINAL                            00006350    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER0                            00000000    00000003 =           3. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER1                            00000000    00000009 =           9. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+
+Files Linked                              [ module(s) ]
+
+code.rel                                  [ code ]
+crt0_cpc.rel                              [ crt0 ]
+putchar_cpc.rel                           [  ]
+
+
+Libraries Linked                          [ object file ]
+
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_AssignKey.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_TestKeyboard.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_keyboardVar.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_AnyKeyPressed.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetModo.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintStr.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_TestKey.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetBorder.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_RedefineKey.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+
+User Base Address Definitions
+
+_CODE = 0x6038
+_DATA = 0x0000
+
+

@@ -1,0 +1,263 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.5.2 #9293 (MINGW64)
+                              4 ; This file was generated Tue Sep 15 18:58:08 2015
+                              5 ;--------------------------------------------------------
+                              6 	.module code
+                              7 	.optsdcc -mz80
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _cpc_AnyKeyPressed
+                             14 	.globl _cpc_PrintGphStrStdXY
+                             15 	.globl _cpc_PrintGphStrStd
+                             16 	.globl _cpc_RLI
+                             17 	.globl _cpc_RRI
+                             18 	.globl _cpc_DisableFirmware
+                             19 	.globl _cpc_EnableFirmware
+                             20 	.globl _cpc_ClrScr
+                             21 	.globl _cpc_SetColour
+                             22 	.globl _cpc_SetMode
+                             23 ;--------------------------------------------------------
+                             24 ; special function registers
+                             25 ;--------------------------------------------------------
+                             26 ;--------------------------------------------------------
+                             27 ; ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _DATA
+                             30 ;--------------------------------------------------------
+                             31 ; ram data
+                             32 ;--------------------------------------------------------
+                             33 	.area _INITIALIZED
+                             34 ;--------------------------------------------------------
+                             35 ; absolute external ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _DABS (ABS)
+                             38 ;--------------------------------------------------------
+                             39 ; global & static initialisations
+                             40 ;--------------------------------------------------------
+                             41 	.area _HOME
+                             42 	.area _GSINIT
+                             43 	.area _GSFINAL
+                             44 	.area _GSINIT
+                             45 ;--------------------------------------------------------
+                             46 ; Home
+                             47 ;--------------------------------------------------------
+                             48 	.area _HOME
+                             49 	.area _HOME
+                             50 ;--------------------------------------------------------
+                             51 ; code
+                             52 ;--------------------------------------------------------
+                             53 	.area _CODE
+                             54 ;code.c:5: char main (void) {
+                             55 ;	---------------------------------
+                             56 ; Function main
+                             57 ; ---------------------------------
+   0000                      58 _main::
+   0000 3B            [ 6]   59 	dec	sp
+                             60 ;code.c:6: unsigned char z=0;
+   0001 FD 21 00 00   [14]   61 	ld	iy,#0
+   0005 FD 39         [15]   62 	add	iy,sp
+   0007 FD 36 00 00   [19]   63 	ld	0 (iy),#0x00
+                             64 ;code.c:9: cpc_DisableFirmware();		//Now, I don't gonna use any firmware routine so I modify interrupts jump to nothing
+   000B CDr00r00      [17]   65 	call	_cpc_DisableFirmware
+                             66 ;code.c:10: cpc_ClrScr();				//fills scr with ink 0
+   000E CDr00r00      [17]   67 	call	_cpc_ClrScr
+                             68 ;code.c:11: cpc_SetMode(1);				//hardware call to set mode 1
+   0011 2E 01         [ 7]   69 	ld	l,#0x01
+   0013 CDr00r00      [17]   70 	call	_cpc_SetMode
+                             71 ;code.c:13: cpc_SetColour(0,20);        //set background = black
+   0016 21 00 14      [10]   72 	ld	hl,#0x1400
+   0019 E5            [11]   73 	push	hl
+   001A CDr00r00      [17]   74 	call	_cpc_SetColour
+                             75 ;code.c:14: cpc_SetColour(16,20);       //set border = black
+   001D 21 10 14      [10]   76 	ld	hl,#0x1410
+   0020 E5            [11]   77 	push	hl
+   0021 CDr00r00      [17]   78 	call	_cpc_SetColour
+                             79 ;code.c:16: cpc_PrintGphStrStd(1,"THIS IS A SMALL DEMO", 0xc050);	//parameters: pen, text, adress
+   0024 21rECr00      [10]   80 	ld	hl,#___str_0
+   0027 01 50 C0      [10]   81 	ld	bc,#0xC050
+   002A C5            [11]   82 	push	bc
+   002B E5            [11]   83 	push	hl
+   002C 3E 01         [ 7]   84 	ld	a,#0x01
+   002E F5            [11]   85 	push	af
+   002F 33            [ 6]   86 	inc	sp
+   0030 CDr00r00      [17]   87 	call	_cpc_PrintGphStrStd
+   0033 F1            [10]   88 	pop	af
+   0034 F1            [10]   89 	pop	af
+   0035 33            [ 6]   90 	inc	sp
+                             91 ;code.c:17: cpc_PrintGphStrStd(2,"OF MODE 1 TEXT WITH",0xc0a0);
+   0036 21r01r01      [10]   92 	ld	hl,#___str_1
+   0039 01 A0 C0      [10]   93 	ld	bc,#0xC0A0
+   003C C5            [11]   94 	push	bc
+   003D E5            [11]   95 	push	hl
+   003E 3E 02         [ 7]   96 	ld	a,#0x02
+   0040 F5            [11]   97 	push	af
+   0041 33            [ 6]   98 	inc	sp
+   0042 CDr00r00      [17]   99 	call	_cpc_PrintGphStrStd
+   0045 F1            [10]  100 	pop	af
+   0046 F1            [10]  101 	pop	af
+   0047 33            [ 6]  102 	inc	sp
+                            103 ;code.c:18: cpc_PrintGphStrStd(3,"8x8 CHARS WITHOUT FIRMWARE",0xc0f0);
+   0048 21r15r01      [10]  104 	ld	hl,#___str_2
+   004B 01 F0 C0      [10]  105 	ld	bc,#0xC0F0
+   004E C5            [11]  106 	push	bc
+   004F E5            [11]  107 	push	hl
+   0050 3E 03         [ 7]  108 	ld	a,#0x03
+   0052 F5            [11]  109 	push	af
+   0053 33            [ 6]  110 	inc	sp
+   0054 CDr00r00      [17]  111 	call	_cpc_PrintGphStrStd
+   0057 F1            [10]  112 	pop	af
+   0058 F1            [10]  113 	pop	af
+   0059 33            [ 6]  114 	inc	sp
+                            115 ;code.c:19: cpc_PrintGphStrStdXY(3,"AND A SMALL SOFT SCROLL DEMO",8,70);
+   005A 11r30r01      [10]  116 	ld	de,#___str_3
+   005D 21 08 46      [10]  117 	ld	hl,#0x4608
+   0060 E5            [11]  118 	push	hl
+   0061 D5            [11]  119 	push	de
+   0062 3E 03         [ 7]  120 	ld	a,#0x03
+   0064 F5            [11]  121 	push	af
+   0065 33            [ 6]  122 	inc	sp
+   0066 CDr00r00      [17]  123 	call	_cpc_PrintGphStrStdXY
+   0069 F1            [10]  124 	pop	af
+   006A F1            [10]  125 	pop	af
+   006B 33            [ 6]  126 	inc	sp
+                            127 ;code.c:20: cpc_PrintGphStrStdXY(2,"CPCRSLIB (C) 2015",19,80);
+   006C 11r4Dr01      [10]  128 	ld	de,#___str_4
+   006F 21 13 50      [10]  129 	ld	hl,#0x5013
+   0072 E5            [11]  130 	push	hl
+   0073 D5            [11]  131 	push	de
+   0074 3E 02         [ 7]  132 	ld	a,#0x02
+   0076 F5            [11]  133 	push	af
+   0077 33            [ 6]  134 	inc	sp
+   0078 CDr00r00      [17]  135 	call	_cpc_PrintGphStrStdXY
+   007B F1            [10]  136 	pop	af
+   007C F1            [10]  137 	pop	af
+   007D 33            [ 6]  138 	inc	sp
+                            139 ;code.c:21: cpc_PrintGphStrStdXY(1, "-- FONT BY ANJUEL  2009  --",2,160);
+   007E 11r5Fr01      [10]  140 	ld	de,#___str_5
+   0081 21 02 A0      [10]  141 	ld	hl,#0xA002
+   0084 E5            [11]  142 	push	hl
+   0085 D5            [11]  143 	push	de
+   0086 3E 01         [ 7]  144 	ld	a,#0x01
+   0088 F5            [11]  145 	push	af
+   0089 33            [ 6]  146 	inc	sp
+   008A CDr00r00      [17]  147 	call	_cpc_PrintGphStrStdXY
+   008D F1            [10]  148 	pop	af
+   008E F1            [10]  149 	pop	af
+   008F 33            [ 6]  150 	inc	sp
+                            151 ;code.c:22: cpc_PrintGphStrStdXY(1,"ABCDEFGHIJKLMNOPQRSTUVWXYZ",2,174);
+   0090 11r7Br01      [10]  152 	ld	de,#___str_6
+   0093 21 02 AE      [10]  153 	ld	hl,#0xAE02
+   0096 E5            [11]  154 	push	hl
+   0097 D5            [11]  155 	push	de
+   0098 3E 01         [ 7]  156 	ld	a,#0x01
+   009A F5            [11]  157 	push	af
+   009B 33            [ 6]  158 	inc	sp
+   009C CDr00r00      [17]  159 	call	_cpc_PrintGphStrStdXY
+   009F F1            [10]  160 	pop	af
+   00A0 F1            [10]  161 	pop	af
+   00A1 33            [ 6]  162 	inc	sp
+                            163 ;code.c:25: while (cpc_AnyKeyPressed()==0) {			//Small scrolling effect
+   00A2                     164 00103$:
+   00A2 CDr00r00      [17]  165 	call	_cpc_AnyKeyPressed
+   00A5 7C            [ 4]  166 	ld	a,h
+   00A6 B5            [ 4]  167 	or	a,l
+   00A7 20 35         [12]  168 	jr	NZ,00106$
+                            169 ;code.c:26: z = !z;
+   00A9 21 00 00      [10]  170 	ld	hl, #0+0
+   00AC 39            [11]  171 	add	hl, sp
+   00AD 7E            [ 7]  172 	ld	a, (hl)
+   00AE D6 01         [ 7]  173 	sub	a,#0x01
+   00B0 3E 00         [ 7]  174 	ld	a,#0x00
+   00B2 17            [ 4]  175 	rla
+   00B3 57            [ 4]  176 	ld	d,a
+   00B4 33            [ 6]  177 	inc	sp
+   00B5 D5            [11]  178 	push	de
+   00B6 33            [ 6]  179 	inc	sp
+                            180 ;code.c:27: if (z) {
+   00B7 7A            [ 4]  181 	ld	a,d
+   00B8 B7            [ 4]  182 	or	a, a
+   00B9 28 16         [12]  183 	jr	Z,00102$
+                            184 ;code.c:28: cpc_RRI (0xe000, 40, 79);
+   00BB 21 28 4F      [10]  185 	ld	hl,#0x4F28
+   00BE E5            [11]  186 	push	hl
+   00BF 21 00 E0      [10]  187 	ld	hl,#0xE000
+   00C2 E5            [11]  188 	push	hl
+   00C3 CDr00r00      [17]  189 	call	_cpc_RRI
+                            190 ;code.c:29: cpc_RRI (0xe4b0, 32, 79);
+   00C6 21 20 4F      [10]  191 	ld	hl,#0x4F20
+   00C9 E5            [11]  192 	push	hl
+   00CA 21 B0 E4      [10]  193 	ld	hl,#0xE4B0
+   00CD E5            [11]  194 	push	hl
+   00CE CDr00r00      [17]  195 	call	_cpc_RRI
+   00D1                     196 00102$:
+                            197 ;code.c:32: cpc_RLI (0xe5f0+0x50+0x50+79, 12, 79);
+   00D1 21 0C 4F      [10]  198 	ld	hl,#0x4F0C
+   00D4 E5            [11]  199 	push	hl
+   00D5 21 DF E6      [10]  200 	ld	hl,#0xE6DF
+   00D8 E5            [11]  201 	push	hl
+   00D9 CDr00r00      [17]  202 	call	_cpc_RLI
+   00DC 18 C4         [12]  203 	jr	00103$
+                            204 ;code.c:38: while (cpc_AnyKeyPressed()==0){}
+   00DE                     205 00106$:
+   00DE CDr00r00      [17]  206 	call	_cpc_AnyKeyPressed
+   00E1 7C            [ 4]  207 	ld	a,h
+   00E2 B5            [ 4]  208 	or	a,l
+   00E3 28 F9         [12]  209 	jr	Z,00106$
+                            210 ;code.c:39: cpc_EnableFirmware();	//before exit, firmware jump is restored
+   00E5 CDr00r00      [17]  211 	call	_cpc_EnableFirmware
+                            212 ;code.c:40: return 0;
+   00E8 2E 00         [ 7]  213 	ld	l,#0x00
+   00EA 33            [ 6]  214 	inc	sp
+   00EB C9            [10]  215 	ret
+   00EC                     216 ___str_0:
+   00EC 54 48 49 53 20 49   217 	.ascii "THIS IS A SMALL DEMO"
+        53 20 41 20 53 4D
+        41 4C 4C 20 44 45
+        4D 4F
+   0100 00                  218 	.db 0x00
+   0101                     219 ___str_1:
+   0101 4F 46 20 4D 4F 44   220 	.ascii "OF MODE 1 TEXT WITH"
+        45 20 31 20 54 45
+        58 54 20 57 49 54
+        48
+   0114 00                  221 	.db 0x00
+   0115                     222 ___str_2:
+   0115 38 78 38 20 43 48   223 	.ascii "8x8 CHARS WITHOUT FIRMWARE"
+        41 52 53 20 57 49
+        54 48 4F 55 54 20
+        46 49 52 4D 57 41
+        52 45
+   012F 00                  224 	.db 0x00
+   0130                     225 ___str_3:
+   0130 41 4E 44 20 41 20   226 	.ascii "AND A SMALL SOFT SCROLL DEMO"
+        53 4D 41 4C 4C 20
+        53 4F 46 54 20 53
+        43 52 4F 4C 4C 20
+        44 45 4D 4F
+   014C 00                  227 	.db 0x00
+   014D                     228 ___str_4:
+   014D 43 50 43 52 53 4C   229 	.ascii "CPCRSLIB (C) 2015"
+        49 42 20 28 43 29
+        20 32 30 31 35
+   015E 00                  230 	.db 0x00
+   015F                     231 ___str_5:
+   015F 2D 2D 20 46 4F 4E   232 	.ascii "-- FONT BY ANJUEL  2009  --"
+        54 20 42 59 20 41
+        4E 4A 55 45 4C 20
+        20 32 30 30 39 20
+        20 2D 2D
+   017A 00                  233 	.db 0x00
+   017B                     234 ___str_6:
+   017B 41 42 43 44 45 46   235 	.ascii "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        47 48 49 4A 4B 4C
+        4D 4E 4F 50 51 52
+        53 54 55 56 57 58
+        59 5A
+   0195 00                  236 	.db 0x00
+                            237 	.area _CODE
+                            238 	.area _INITIALIZER
+                            239 	.area _CABS (ABS)

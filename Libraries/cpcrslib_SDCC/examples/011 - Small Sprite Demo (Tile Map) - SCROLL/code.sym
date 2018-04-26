@@ -1,0 +1,118 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 _ANCHO_PANTALLA_SC                                             0F45 GR
+  0 _ScrClr                                                        0F6E GR
+  0 _TILES_ANCHO_TOT                                               0F47 GR
+  0 ___str_0                                                       1091 R
+  0 ___str_1                                                       10AA R
+  0 ___str_2                                                       10BA R
+  0 ___str_3                                                       10CB R
+  7 __xinit__pointerH                                              0000 R
+  0 _act_visible                                                   131B GR
+  0 _actualizaPantalla                                             10DE GR
+  0 _bloques                                                       07BE GR
+  1 _col                                                           0139 GR
+  1 _colMax                                                        013B GR
+  0 _collide                                                       0FA0 GR
+    _cpc_DisableFirmware                                           **** GX
+    _cpc_PrintGphStrXY                                             **** GX
+    _cpc_PutMaskSpTileMap2b                                        **** GX
+    _cpc_PutSpTileMap                                              **** GX
+    _cpc_ResetTouchedTiles                                         **** GX
+    _cpc_ScrollLeft00                                              **** GX
+    _cpc_ScrollLeft01                                              **** GX
+    _cpc_ScrollRight00                                             **** GX
+    _cpc_ScrollRight01                                             **** GX
+    _cpc_SetColour                                                 **** GX
+    _cpc_SetInkGphStr                                              **** GX
+    _cpc_SetMode                                                   **** GX
+    _cpc_SetTile                                                   **** GX
+    _cpc_ShowTileMap                                               **** GX
+    _cpc_ShowTileMap2                                              **** GX
+    _cpc_TestKey                                                   **** GX
+    _cpc_UpdScr                                                    **** GX
+  1 _d                                                             0134 GR
+  1 _disparo                                                       0000 GR
+  0 _drawColumnD                                                   0000 GR
+  0 _drawColumnI                                                   0DAE GR
+  0 _draw_bloque                                                   0FB2 GR
+  0 _draw_tilemap                                                  102B GR
+  1 _e                                                             0135 GR
+  1 _edisparo                                                      0060 GR
+  1 _f                                                             0136 GR
+  0 _initPointers                                                  0F32 GR
+  0 _main                                                          143F GR
+  1 _nPila                                                         01A3 GR
+  1 _nave                                                          00D7 GR
+  1 _p_disparo                                                     0153 GR
+  1 _p_nave                                                        013D GR
+  1 _p_sprite                                                      013F GR
+  1 _p_sprites                                                     01A4 GR
+  0 _paleta                                                        07AD GR
+    _pantalla_juego                                                **** GX
+  0 _pause                                                         0F9A GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  1 _pilaEnemigos                                                  0167 GR
+  2 _pointerH                                                      0000 GR
+  0 _print_credits                                                 1064 GR
+  0 _prota                                                         0918 GR
+  0 _prota0                                                        09C4 GR
+  0 _protai                                                        0A70 GR
+  0 _protai0                                                       0B1C GR
+  0 _protas0                                                       0BC8 GR
+  0 _protas1                                                       0C74 GR
+  1 _sc                                                            0133 GR
+  0 _setScreen                                                     0F48 GR
+  0 _set_colours                                                   0F7C GR
+  0 _spnave                                                        0832 GR
+  1 _sprite                                                        00C0 GR
+  1 _sprite00                                                      00EE GR
+  1 _sprite01                                                      0105 GR
+  1 _sprite02                                                      011C GR
+  0 _test_map2                                                     002D GR
+    _tiles                                                         **** GX
+  1 _vs1                                                           0137 GR
+  1 _vs2                                                           0138 GR
+  0 buc_reg                                                        0F4C R
+  0 bucle_ciA                                                      0DD9 R
+  0 datos_scroll_CD                                                0E91 R
+  0 datos_scroll_CI                                                0EE1 R
+  0 dibuja_tile                                                    0E46 R
+  0 paresI                                                         0E29 R
+  0 pause_loop                                                     0F9C R
+  0 print_tileA                                                    0E18 R
+  0 registros                                                      0F5D R
+  0 setParesI                                                      0E12 R
+  0 tile1A                                                         0E2E R
+  0 tile1deA                                                       0E32 R
+  0 tile3A                                                         0E38 R
+  0 tile3deA                                                       0E3F R
+  0 vetiles                                                        0DD7 R
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size 17C0   flags    0
+   1 _DATA                                      size  1B2   flags    0
+   2 _INITIALIZED                               size    2   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    2   flags    0
+   8 _CABS                                      size    0   flags    8
+

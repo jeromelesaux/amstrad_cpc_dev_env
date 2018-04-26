@@ -1,0 +1,200 @@
+SNArkos by Grim/Arkos
+---v1.4 [20060204]---
+
+SNArkos is a small utility that allow you to transfert .SNA file from your PC to
+your CPC using the CPCBooster.
+
+Requirements:
+CPCBooster with latest BIOS
+RAM/ROMCard
+AFT running on your PeeCee
+
+Check these web pages for the latest informations about SNArkos and CPCBooster :
+http://dirtyminds.cpcscene.com
+http://arkos.cpcscene.com
+
+License: sceneLegacyWare.
+If you have any old bits of demoscene stuff on your floppies,  send them as DSKs
+(you can use ReadDSK for that :) to grim@cpcscene.com
+
+
+
+What's a .SNA ?
+---------------
+
+A snapshot file contains information about the state of the CPC emulator at  the
+time it was saved.
+
+SNArkos support version 1.0 and  later (2.0 and 3.0) of  snapshot specifications
+(available at http://andercheran.aiind.upv.es/~amstrad/docs/snapshot.html).
+
+
+
+How to use it ?
+---------------
+
+MANDATORY : AFT must be running on your PeeCee.
+
+-Load a snashot on your CPC
+
+  |sna,"maurice.sna"
+  Will try to load the snapshot "maurice.sna" on your CPC.
+
+  The  file  extension  is  optionnal,  SNArkos  will  automatically  add  it to
+  the filename if it's missing :
+
+  |sna,"maurice"
+  Will  try to  load the  snapshot "maurice.sna"  on your  CPC as   well.
+
+
+
+-SNArkos take an optionnal second parameter, the autoboot flag :
+
+  |sna,"maurice.sna",1 
+  Same  as  above  but the   last   argument  will  enable the  autoboot feature
+  of SNArkos. The autboot, when enabled, will automatically  load your  snapshot
+  file when the firmware  is initialized (ie:  after a reset).
+
+  When the autoboot  is enabled, you  can skip it  at boot time  by pressing the
+  CTRL key. If you want to disable it, use the CLR key at boot time.
+
+  If you do not see the point of this feature, then just forget about it :)
+
+
+
+-You can use SNArkos without any parameters :
+
+  |sna
+  Will reload the last used snapshot (or "snarkos.sna" by default).
+
+
+
+-FDC Initialization
+  When a snapshot is loaded on your CPC, the FDC may not be initialized. SNArkos
+  automatically initialize  the steprate  and headload  time parameters  but, by
+  default, doesn't recalibrate the FDC and it can be, in some case, a problem.
+
+  |snafdc,"A" 
+  |snafdc,"B"
+
+  With this RSX, you can tell SNArkos to recalibrate (seektrack0) the FDC before
+  loading the snapshot (work with 80 tracks drive too). If you do not provide  a
+  valid drive letter, then it will disable the FDC recalibration.
+
+
+
+-Display snapshot informations
+  You can get some information about the latest used snapshot (mostly values of
+  the differents chips registers).
+
+  |snah
+
+
+
+If anything is wrong (bad filename, loading something else than a snapshot, ...)
+SNArkos will complain about it.
+
+While the snapshot is  loading, if the screen  goes red, that's because  a fatal
+timeout occured. Reset your CPC and same player, play again.
+
+
+
+CrossDev
+--------
+
+SNArkos is, initially, a crossdev tool to allow you to quickly test your code on
+a real CPC instead of emus. It's now possible to edit your asm source file on PC
+and then assemble it  (zmac), build a snapshot  (createsnapshot) and send it  to
+the CPC in just a few seconds ! No boring and slow dsk or file transfert !
+Just install CPCTools and configure your text editor with appropriate macros.
+
+You will find CPCTools on http://arkos.cpcscene.com or http://www.ramlaid.com
+
+
+Technicals informations
+-----------------------
+
+SNArkos  use  the  CPCBooster  RAM to  store  it's  configuration  (filename and
+parameters) that's why it require a CPCBooster with the latest BIOS available.
+
+-The CPC's PPI configuration is not updated
+
+-The FDC's Track information is not used
+
+-There's NO hardware detection, you can send 572Kb CRTC 4 SNA DATA on a 64Kb CPC
+CRTC 2, it  will just crash.  An hardware test  will cost some  rom space and is
+pretty useless imo if you use your brain.
+
+-The synchronisation data (in SNAv3  specifications) are not used, the  SNA will
+be launched as soon as it is ready.
+
+-Masquable interruptions are disabled while the transfert then, according to the
+IFF0 flag, they will be enabled just before the JUMP to the PC address  (meaning
+that an interrupt may occur just before your code is executed).
+
+-16 bytes of CPC RAM  are used to store the  SNA boot routine (&FFF0 to  &FFFF).
+These bytes will be written into  the RAM according to the MMU  configuration of
+the SNA (so they  can be in the  64Kb chip ram or  the extended RAM). Any SNA
+with an upper ROM enabled wont work (ie: any running BASIC program).
+
+-While the  transfert, if  you get  a red  screen then  a timeout  occured while
+transfering the RAM datas. Reset your CPC, same player play again.	
+
+-Additionnal memory chunks are not used (see notes about the CPC+ chunk).
+
+AY3-8912, CRTC, GATEARRAY and Z80 (but R) registers are restored as well as each
+64Kb pages included in the sna.
+
+
+How to make a proper, reliable and working SNA
+----------------------------------------------
+
+Configure correctly  the RAM  and CPC  models settings  in your  emulator or SNA
+generator to match the real CPC configuration.
+
+It's a good idea to have the maskable interriptions disabled when  creating  the
+SNA, moreover when the firmware manage them.
+
+When dealing with splitscreen or anything requiring very high synchro  accuracy,
+avoid to snapshot that while it is running, do it just before in your init  code
+for exemple.
+
+Take care of  the FDC. If  you load a  SNA  of  a  hand made FDC  loader, do not
+forget that the  FDC may be   NOT calibrated (FDC  command seektrack0) when  the
+SNA and so your loader code will be executed. Use |snafdc to calibrate the FDC. 
+
+Beware of protections using Z80 register R. They may fail since this register is
+not restored.
+
+WinAPE versions prior  to 2.0Alpha6 produce  a corrupted .SNA  file (CRTC values
+are stored as word instead of byte, overlapping the PPI data space, and are then
+overwritten with PPI data... a complete mess). Use the latest version of WinAPE.
+
+For an unknow reason, a .SNA of a CPC running any firmware thing (and especially
+the interrupts manager) crash on real CPC. I may investigate  and  correct  that
+in a later version of SNArkos but do not have too many hopes  (SNArkos  is punk,
+fuck the system !).
+
+
+
+About CPC+ chunk
+----------------
+
+There's specifications about this chunk dedicated to the ASIC of the AmstradPlus
+but I could  not find any  emulator supporting it  and so I  could not verify if
+SNArkos manage it correctly.  So I disabled all  support for CPC+ chunk  in this
+version of SNArkos (sorry Daddy Iron, but  you  will  have  to  write  your  own
+AmstradPlus emulator too :).
+
+
+--------------------------------------------------------------------------------
+
+
+If you are reading this, that's good ! Because I wont provide any serious anwser
+to anything already explained above :)
+
+Thanx a lot to Antitec for resurecting several time my CPCBoosters :)
+
+Happy coding !
+
+															Grim/Arkos

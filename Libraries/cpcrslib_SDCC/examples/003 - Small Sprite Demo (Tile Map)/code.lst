@@ -1,0 +1,690 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.5.2 #9293 (MINGW64)
+                              4 ; This file was generated Tue Sep 15 21:04:30 2015
+                              5 ;--------------------------------------------------------
+                              6 	.module code
+                              7 	.optsdcc -mz80
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _print_credits
+                             14 	.globl _draw_tilemap
+                             15 	.globl _collide
+                             16 	.globl _pause
+                             17 	.globl _set_colours
+                             18 	.globl _initPointers
+                             19 	.globl _data
+                             20 	.globl _cpc_SuperbufferAddress
+                             21 	.globl _cpc_PutMaskSpTileMap2b
+                             22 	.globl _cpc_UpdScr
+                             23 	.globl _cpc_PutSpTileMap
+                             24 	.globl _cpc_ResetTouchedTiles
+                             25 	.globl _cpc_ShowTileMap2
+                             26 	.globl _cpc_ShowTileMap
+                             27 	.globl _cpc_SetTile
+                             28 	.globl _cpc_TestKey
+                             29 	.globl _cpc_SetInkGphStr
+                             30 	.globl _cpc_PrintGphStrXY
+                             31 	.globl _cpc_CollSp
+                             32 	.globl _cpc_DisableFirmware
+                             33 	.globl _cpc_SetBorder
+                             34 	.globl _cpc_SetInk
+                             35 	.globl _cpc_SetColour
+                             36 	.globl _cpc_SetModo
+                             37 	.globl _p_sprites
+                             38 	.globl _sprite02
+                             39 	.globl _sprite01
+                             40 	.globl _sprite00
+                             41 ;--------------------------------------------------------
+                             42 ; special function registers
+                             43 ;--------------------------------------------------------
+                             44 ;--------------------------------------------------------
+                             45 ; ram data
+                             46 ;--------------------------------------------------------
+                             47 	.area _DATA
+   0000                      48 _sprite00::
+   0000                      49 	.ds 14
+   000E                      50 _sprite01::
+   000E                      51 	.ds 14
+   001C                      52 _sprite02::
+   001C                      53 	.ds 14
+   002A                      54 _p_sprites::
+   002A                      55 	.ds 14
+                             56 ;--------------------------------------------------------
+                             57 ; ram data
+                             58 ;--------------------------------------------------------
+                             59 	.area _INITIALIZED
+                             60 ;--------------------------------------------------------
+                             61 ; absolute external ram data
+                             62 ;--------------------------------------------------------
+                             63 	.area _DABS (ABS)
+                             64 ;--------------------------------------------------------
+                             65 ; global & static initialisations
+                             66 ;--------------------------------------------------------
+                             67 	.area _HOME
+                             68 	.area _GSINIT
+                             69 	.area _GSFINAL
+                             70 	.area _GSINIT
+                             71 ;--------------------------------------------------------
+                             72 ; Home
+                             73 ;--------------------------------------------------------
+                             74 	.area _HOME
+                             75 	.area _HOME
+                             76 ;--------------------------------------------------------
+                             77 ; code
+                             78 ;--------------------------------------------------------
+                             79 	.area _CODE
+                             80 ;code.c:25: void data(void)
+                             81 ;	---------------------------------
+                             82 ; Function data
+                             83 ; ---------------------------------
+   0000                      84 _data::
+                             85 ;code.c:80: __endasm;
+   0000                      86 	_buffer:
+   0000 1E                   87 	.db #30
+   0001                      88 	_sp_1:
+   0001 04 10                89 	.db #4,#16
+   0003 FF 00 00 CF 00 CF    90 	.db #0xFF,#0x00,#0x00,#0xCF,#0x00,#0xCF,#0xFF,#0x00
+        FF 00
+   000B AA 45 00 3C 00 3C    91 	.db #0xAA,#0x45,#0x00,#0x3C,#0x00,#0x3C,#0x55,#0x8A
+        55 8A
+   0013 00 8A 00 55 00 AA    92 	.db #0x00,#0x8A,#0x00,#0x55,#0x00,#0xAA,#0x00,#0x45
+        00 45
+   001B 00 8A 00 20 00 00    93 	.db #0x00,#0x8A,#0x00,#0x20,#0x00,#0x00,#0x00,#0x65
+        00 65
+   0023 00 28 00 55 00 AA    94 	.db #0x00,#0x28,#0x00,#0x55,#0x00,#0xAA,#0x00,#0x14
+        00 14
+   002B 00 7D 00 BE 00 FF    95 	.db #0x00,#0x7D,#0x00,#0xBE,#0x00,#0xFF,#0x00,#0xBE
+        00 BE
+   0033 AA 14 00 FF 00 BE    96 	.db #0xAA,#0x14,#0x00,#0xFF,#0x00,#0xBE,#0x55,#0x28
+        55 28
+   003B AA 00 00 3C 00 79    97 	.db #0xAA,#0x00,#0x00,#0x3C,#0x00,#0x79,#0x55,#0x00
+        55 00
+   0043 00 51 00 51 00 A2    98 	.db #0x00,#0x51,#0x00,#0x51,#0x00,#0xA2,#0x55,#0xA2
+        55 A2
+   004B 00 F3 00 10 00 20    99 	.db #0x00,#0xF3,#0x00,#0x10,#0x00,#0x20,#0x00,#0xF3
+        00 F3
+   0053 00 F3 00 51 00 A2   100 	.db #0x00,#0xF3,#0x00,#0x51,#0x00,#0xA2,#0x00,#0xF3
+        00 F3
+   005B 55 28 00 0F 00 0F   101 	.db #0x55,#0x28,#0x00,#0x0F,#0x00,#0x0F,#0xAA,#0x14
+        AA 14
+   0063 FF 00 55 0A AA 05   102 	.db #0xFF,#0x00,#0x55,#0x0A,#0xAA,#0x05,#0xFF,#0x00
+        FF 00
+   006B 55 02 55 28 AA 14   103 	.db #0x55,#0x02,#0x55,#0x28,#0xAA,#0x14,#0xAA,#0x01
+        AA 01
+   0073 00 03 55 02 AA 01   104 	.db #0x00,#0x03,#0x55,#0x02,#0xAA,#0x01,#0x00,#0x03
+        00 03
+   007B FF 00 FF 00 FF 00   105 	.db #0xFF,#0x00,#0xFF,#0x00,#0xFF,#0x00,#0xFF,#0x00
+        FF 00
+   0083                     106 	_sp_2:
+   0083 04 16               107 	.db #4,#22
+   0085 FF 00 FF 00 FF 00   108 	.db #0xFF,#0x00,#0xFF,#0x00,#0xFF,#0x00,#0xFF,#0x00
+        FF 00
+   008D FF 00 00 CC 00 CC   109 	.db #0xFF,#0x00,#0x00,#0xCC,#0x00,#0xCC,#0xFF,#0x00
+        FF 00
+   0095 FF 00 AA 44 55 88   110 	.db #0xFF,#0x00,#0xAA,#0x44,#0x55,#0x88,#0xFF,#0x00
+        FF 00
+   009D FF 00 AA 44 55 88   111 	.db #0xFF,#0x00,#0xAA,#0x44,#0x55,#0x88,#0xFF,#0x00
+        FF 00
+   00A5 FF 00 AA 44 55 88   112 	.db #0xFF,#0x00,#0xAA,#0x44,#0x55,#0x88,#0xFF,#0x00
+        FF 00
+   00AD FF 00 00 CF 00 CF   113 	.db #0xFF,#0x00,#0x00,#0xCF,#0x00,#0xCF,#0xFF,#0x00
+        FF 00
+   00B5 AA 45 00 CF 00 CF   114 	.db #0xAA,#0x45,#0x00,#0xCF,#0x00,#0xCF,#0x55,#0x8A
+        55 8A
+   00BD AA 45 00 E5 00 DA   115 	.db #0xAA,#0x45,#0x00,#0xE5,#0x00,#0xDA,#0x55,#0x8A
+        55 8A
+   00C5 AA 45 00 CF 00 CF   116 	.db #0xAA,#0x45,#0x00,#0xCF,#0x00,#0xCF,#0x55,#0x8A
+        55 8A
+   00CD AA 45 00 CF 00 CF   117 	.db #0xAA,#0x45,#0x00,#0xCF,#0x00,#0xCF,#0x55,#0x8A
+        55 8A
+   00D5 AA 45 00 CF 00 CF   118 	.db #0xAA,#0x45,#0x00,#0xCF,#0x00,#0xCF,#0x55,#0x8A
+        55 8A
+   00DD AA 45 00 CF 00 CF   119 	.db #0xAA,#0x45,#0x00,#0xCF,#0x00,#0xCF,#0x55,#0x8A
+        55 8A
+   00E5 FF 00 00 CF 00 CF   120 	.db #0xFF,#0x00,#0x00,#0xCF,#0x00,#0xCF,#0xFF,#0x00
+        FF 00
+   00ED AA 01 00 03 00 03   121 	.db #0xAA,#0x01,#0x00,#0x03,#0x00,#0x03,#0x55,#0x02
+        55 02
+   00F5 00 A9 00 03 00 03   122 	.db #0x00,#0xA9,#0x00,#0x03,#0x00,#0x03,#0x00,#0x56
+        00 56
+   00FD 00 A9 00 03 00 03   123 	.db #0x00,#0xA9,#0x00,#0x03,#0x00,#0x03,#0x00,#0x56
+        00 56
+   0105 AA 01 00 03 00 03   124 	.db #0xAA,#0x01,#0x00,#0x03,#0x00,#0x03,#0x55,#0x02
+        55 02
+   010D AA 01 00 03 00 03   125 	.db #0xAA,#0x01,#0x00,#0x03,#0x00,#0x03,#0x55,#0x02
+        55 02
+   0115 AA 01 00 06 00 09   126 	.db #0xAA,#0x01,#0x00,#0x06,#0x00,#0x09,#0x55,#0x02
+        55 02
+   011D FF 00 00 0C 00 0C   127 	.db #0xFF,#0x00,#0x00,#0x0C,#0x00,#0x0C,#0xFF,#0x00
+        FF 00
+   0125 FF 00 00 0C 00 0C   128 	.db #0xFF,#0x00,#0x00,#0x0C,#0x00,#0x0C,#0xFF,#0x00
+        FF 00
+   012D FF 00 00 0C 00 0C   129 	.db #0xFF,#0x00,#0x00,#0x0C,#0x00,#0x0C,#0xFF,#0x00
+        FF 00
+   0135                     130 	_tintas:
+   0135 00 0D 01 06 1A 18   131 	.db #0,#13,#1,#6,#26,#24,#15,#8,#10,#22,#14,#3,#18,#4,#11,#25
+        0F 08 0A 16 0E 03
+        12 04 0B 19
+   0145 C9            [10]  132 	ret
+                            133 ;code.c:88: void initPointers()
+                            134 ;	---------------------------------
+                            135 ; Function initPointers
+                            136 ; ---------------------------------
+   0146                     137 _initPointers::
+                            138 ;code.c:91: p_sprites[0] = &sprite00;
+   0146 21r00r00      [10]  139 	ld	hl,#_sprite00
+   0149 22r2Ar00      [16]  140 	ld	(_p_sprites), hl
+                            141 ;code.c:92: p_sprites[1] = &sprite01;
+   014C 21r0Er00      [10]  142 	ld	hl,#_sprite01
+   014F 22r2Cr00      [16]  143 	ld	((_p_sprites + 0x0002)), hl
+                            144 ;code.c:93: p_sprites[2] = &sprite02;
+   0152 21r1Cr00      [10]  145 	ld	hl,#_sprite02
+   0155 22r2Er00      [16]  146 	ld	((_p_sprites + 0x0004)), hl
+   0158 C9            [10]  147 	ret
+                            148 ;code.c:97: void set_colours(void)
+                            149 ;	---------------------------------
+                            150 ; Function set_colours
+                            151 ; ---------------------------------
+   0159                     152 _set_colours::
+                            153 ;code.c:100: for (x=0; x<16; x++)
+   0159 16 00         [ 7]  154 	ld	d,#0x00
+   015B                     155 00102$:
+                            156 ;code.c:102: cpc_SetInk(x,tintas[x]);
+   015B FD 21r35r01   [14]  157 	ld	iy,#_tintas
+   015F 4A            [ 4]  158 	ld	c,d
+   0160 06 00         [ 7]  159 	ld	b,#0x00
+   0162 FD 09         [15]  160 	add	iy, bc
+   0164 FD 66 00      [19]  161 	ld	h, 0 (iy)
+   0167 D5            [11]  162 	push	de
+   0168 E5            [11]  163 	push	hl
+   0169 33            [ 6]  164 	inc	sp
+   016A D5            [11]  165 	push	de
+   016B 33            [ 6]  166 	inc	sp
+   016C CDr00r00      [17]  167 	call	_cpc_SetInk
+   016F D1            [10]  168 	pop	de
+                            169 ;code.c:100: for (x=0; x<16; x++)
+   0170 14            [ 4]  170 	inc	d
+   0171 7A            [ 4]  171 	ld	a,d
+   0172 D6 10         [ 7]  172 	sub	a, #0x10
+   0174 38 E5         [12]  173 	jr	C,00102$
+                            174 ;code.c:104: cpc_SetBorder(0);
+   0176 2E 00         [ 7]  175 	ld	l,#0x00
+   0178 CDr00r00      [17]  176 	call	_cpc_SetBorder
+   017B C9            [10]  177 	ret
+                            178 ;code.c:106: void pause(void)
+                            179 ;	---------------------------------
+                            180 ; Function pause
+                            181 ; ---------------------------------
+   017C                     182 _pause::
+                            183 ;code.c:113: __endasm;
+   017C 06 50         [ 7]  184 	ld b,#80
+   017E                     185 	pause_loop:
+   017E 76            [ 4]  186 	halt
+   017F 10 FD         [13]  187 	djnz pause_loop
+   0181 C9            [10]  188 	ret
+                            189 ;code.c:115: void collide(void)
+                            190 ;	---------------------------------
+                            191 ; Function collide
+                            192 ; ---------------------------------
+   0182                     193 _collide::
+                            194 ;code.c:117: cpc_SetColour(16,1);
+   0182 21 10 01      [10]  195 	ld	hl,#0x0110
+   0185 E5            [11]  196 	push	hl
+   0186 CDr00r00      [17]  197 	call	_cpc_SetColour
+                            198 ;code.c:118: pause();
+   0189 CDr7Cr01      [17]  199 	call	_pause
+                            200 ;code.c:119: cpc_SetColour(16,9);
+   018C 21 10 09      [10]  201 	ld	hl,#0x0910
+   018F E5            [11]  202 	push	hl
+   0190 CDr00r00      [17]  203 	call	_cpc_SetColour
+   0193 C9            [10]  204 	ret
+                            205 ;code.c:122: void draw_tilemap(void)
+                            206 ;	---------------------------------
+                            207 ; Function draw_tilemap
+                            208 ; ---------------------------------
+   0194                     209 _draw_tilemap::
+                            210 ;code.c:129: for(x=0; x<32; x++)
+   0194 16 00         [ 7]  211 	ld	d,#0x00
+   0196                     212 00105$:
+                            213 ;code.c:131: cpc_SetTile(x,y,1);
+   0196 D5            [11]  214 	push	de
+   0197 21 00 01      [10]  215 	ld	hl,#0x0100
+   019A E5            [11]  216 	push	hl
+   019B D5            [11]  217 	push	de
+   019C 33            [ 6]  218 	inc	sp
+   019D CDr00r00      [17]  219 	call	_cpc_SetTile
+   01A0 F1            [10]  220 	pop	af
+   01A1 33            [ 6]  221 	inc	sp
+   01A2 D1            [10]  222 	pop	de
+                            223 ;code.c:129: for(x=0; x<32; x++)
+   01A3 14            [ 4]  224 	inc	d
+   01A4 7A            [ 4]  225 	ld	a,d
+   01A5 D6 20         [ 7]  226 	sub	a, #0x20
+   01A7 38 ED         [12]  227 	jr	C,00105$
+                            228 ;code.c:133: for(y=1; y<15; y++)
+   01A9 16 01         [ 7]  229 	ld	d,#0x01
+                            230 ;code.c:135: for (x=0; x<32; x++)
+   01AB                     231 00117$:
+   01AB 1E 00         [ 7]  232 	ld	e,#0x00
+   01AD                     233 00107$:
+                            234 ;code.c:137: cpc_SetTile(x,y,0);
+   01AD D5            [11]  235 	push	de
+   01AE AF            [ 4]  236 	xor	a, a
+   01AF F5            [11]  237 	push	af
+   01B0 33            [ 6]  238 	inc	sp
+   01B1 D5            [11]  239 	push	de
+   01B2 CDr00r00      [17]  240 	call	_cpc_SetTile
+   01B5 F1            [10]  241 	pop	af
+   01B6 33            [ 6]  242 	inc	sp
+   01B7 D1            [10]  243 	pop	de
+                            244 ;code.c:135: for (x=0; x<32; x++)
+   01B8 1C            [ 4]  245 	inc	e
+   01B9 7B            [ 4]  246 	ld	a,e
+   01BA D6 20         [ 7]  247 	sub	a, #0x20
+   01BC 38 EF         [12]  248 	jr	C,00107$
+                            249 ;code.c:133: for(y=1; y<15; y++)
+   01BE 14            [ 4]  250 	inc	d
+   01BF 7A            [ 4]  251 	ld	a,d
+   01C0 D6 0F         [ 7]  252 	sub	a, #0x0F
+   01C2 38 E7         [12]  253 	jr	C,00117$
+                            254 ;code.c:141: for (x=0; x<32; x++)
+   01C4 16 00         [ 7]  255 	ld	d,#0x00
+   01C6                     256 00111$:
+                            257 ;code.c:143: cpc_SetTile(x,y,2);
+   01C6 D5            [11]  258 	push	de
+   01C7 21 0F 02      [10]  259 	ld	hl,#0x020F
+   01CA E5            [11]  260 	push	hl
+   01CB D5            [11]  261 	push	de
+   01CC 33            [ 6]  262 	inc	sp
+   01CD CDr00r00      [17]  263 	call	_cpc_SetTile
+   01D0 F1            [10]  264 	pop	af
+   01D1 33            [ 6]  265 	inc	sp
+   01D2 D1            [10]  266 	pop	de
+                            267 ;code.c:141: for (x=0; x<32; x++)
+   01D3 14            [ 4]  268 	inc	d
+   01D4 7A            [ 4]  269 	ld	a,d
+   01D5 D6 20         [ 7]  270 	sub	a, #0x20
+   01D7 38 ED         [12]  271 	jr	C,00111$
+   01D9 C9            [10]  272 	ret
+                            273 ;code.c:147: void print_credits(void)
+                            274 ;	---------------------------------
+                            275 ; Function print_credits
+                            276 ; ---------------------------------
+   01DA                     277 _print_credits::
+                            278 ;code.c:149: cpc_PrintGphStrXY("SMALL;SPRITE;DEMO",9*2+3,20*8);
+   01DA 11r07r02      [10]  279 	ld	de,#___str_0
+   01DD 21 15 A0      [10]  280 	ld	hl,#0xA015
+   01E0 E5            [11]  281 	push	hl
+   01E1 D5            [11]  282 	push	de
+   01E2 CDr00r00      [17]  283 	call	_cpc_PrintGphStrXY
+                            284 ;code.c:150: cpc_PrintGphStrXY("SDCC;;;CPCRSLIB",10*2+3,21*8);
+   01E5 11r19r02      [10]  285 	ld	de,#___str_1
+   01E8 21 17 A8      [10]  286 	ld	hl,#0xA817
+   01EB E5            [11]  287 	push	hl
+   01EC D5            [11]  288 	push	de
+   01ED CDr00r00      [17]  289 	call	_cpc_PrintGphStrXY
+                            290 ;code.c:151: cpc_PrintGphStrXY("BY;ARTABURU;2015",10*2+2,22*8);
+   01F0 11r29r02      [10]  291 	ld	de,#___str_2
+   01F3 21 16 B0      [10]  292 	ld	hl,#0xB016
+   01F6 E5            [11]  293 	push	hl
+   01F7 D5            [11]  294 	push	de
+   01F8 CDr00r00      [17]  295 	call	_cpc_PrintGphStrXY
+                            296 ;code.c:152: cpc_PrintGphStrXY("ESPSOFT<AMSTRAD<ES",10*2+3-3,24*8);
+   01FB 11r3Ar02      [10]  297 	ld	de,#___str_3
+   01FE 21 14 C0      [10]  298 	ld	hl,#0xC014
+   0201 E5            [11]  299 	push	hl
+   0202 D5            [11]  300 	push	de
+   0203 CDr00r00      [17]  301 	call	_cpc_PrintGphStrXY
+   0206 C9            [10]  302 	ret
+   0207                     303 ___str_0:
+   0207 53 4D 41 4C 4C 3B   304 	.ascii "SMALL;SPRITE;DEMO"
+        53 50 52 49 54 45
+        3B 44 45 4D 4F
+   0218 00                  305 	.db 0x00
+   0219                     306 ___str_1:
+   0219 53 44 43 43 3B 3B   307 	.ascii "SDCC;;;CPCRSLIB"
+        3B 43 50 43 52 53
+        4C 49 42
+   0228 00                  308 	.db 0x00
+   0229                     309 ___str_2:
+   0229 42 59 3B 41 52 54   310 	.ascii "BY;ARTABURU;2015"
+        41 42 55 52 55 3B
+        32 30 31 35
+   0239 00                  311 	.db 0x00
+   023A                     312 ___str_3:
+   023A 45 53 50 53 4F 46   313 	.ascii "ESPSOFT<AMSTRAD<ES"
+        54 3C 41 4D 53 54
+        52 41 44 3C 45 53
+   024C 00                  314 	.db 0x00
+                            315 ;code.c:155: main()
+                            316 ;	---------------------------------
+                            317 ; Function main
+                            318 ; ---------------------------------
+   024D                     319 _main::
+   024D DD E5         [15]  320 	push	ix
+   024F DD 21 00 00   [14]  321 	ld	ix,#0
+   0253 DD 39         [15]  322 	add	ix,sp
+   0255 F5            [11]  323 	push	af
+                            324 ;code.c:159: initPointers();
+   0256 CDr46r01      [17]  325 	call	_initPointers
+                            326 ;code.c:162: set_colours();
+   0259 CDr59r01      [17]  327 	call	_set_colours
+                            328 ;code.c:163: cpc_SetInkGphStr(0,0);
+   025C 21 00 00      [10]  329 	ld	hl,#0x0000
+   025F E5            [11]  330 	push	hl
+   0260 CDr00r00      [17]  331 	call	_cpc_SetInkGphStr
+                            332 ;code.c:164: cpc_SetModo(0);
+   0263 2E 00         [ 7]  333 	ld	l,#0x00
+   0265 CDr00r00      [17]  334 	call	_cpc_SetModo
+                            335 ;code.c:166: cpc_DisableFirmware();
+   0268 CDr00r00      [17]  336 	call	_cpc_DisableFirmware
+                            337 ;code.c:168: sprite00.sp1=sp_1;
+   026B 21r01r00      [10]  338 	ld	hl,#_sp_1
+   026E 22r02r00      [16]  339 	ld	((_sprite00 + 0x0002)), hl
+                            340 ;code.c:169: sprite00.sp0=sp_1;
+   0271 22r00r00      [16]  341 	ld	(_sprite00), hl
+                            342 ;code.c:170: sprite00.ox=50;
+   0274 21r0Ar00      [10]  343 	ld	hl,#_sprite00 + 10
+   0277 36 32         [10]  344 	ld	(hl),#0x32
+                            345 ;code.c:171: sprite00.oy=70;
+   0279 21r0Br00      [10]  346 	ld	hl,#_sprite00 + 11
+   027C 36 46         [10]  347 	ld	(hl),#0x46
+                            348 ;code.c:172: sprite00.cx=50;
+   027E 21r08r00      [10]  349 	ld	hl,#(_sprite00 + 0x0008)
+   0281 36 32         [10]  350 	ld	(hl),#0x32
+                            351 ;code.c:173: sprite00.cy=70;
+   0283 21r09r00      [10]  352 	ld	hl,#(_sprite00 + 0x0009)
+   0286 36 46         [10]  353 	ld	(hl),#0x46
+                            354 ;code.c:174: sprite00.move1=3;
+   0288 21r0Cr00      [10]  355 	ld	hl,#(_sprite00 + 0x000c)
+   028B 36 03         [10]  356 	ld	(hl),#0x03
+                            357 ;code.c:175: cpc_SuperbufferAddress(p_sprites[0]); //first time it's important to do this
+   028D 21r2Ar00      [10]  358 	ld	hl, #_p_sprites + 0
+   0290 7E            [ 7]  359 	ld	a,(hl)
+   0291 DD 77 FE      [19]  360 	ld	-2 (ix),a
+   0294 23            [ 6]  361 	inc	hl
+   0295 7E            [ 7]  362 	ld	a,(hl)
+   0296 DD 77 FF      [19]  363 	ld	-1 (ix),a
+   0299 E1            [10]  364 	pop	hl
+   029A E5            [11]  365 	push	hl
+   029B E5            [11]  366 	push	hl
+   029C CDr00r00      [17]  367 	call	_cpc_SuperbufferAddress
+   029F F1            [10]  368 	pop	af
+                            369 ;code.c:177: sprite01.sp1=sp_2;
+   02A0 21r83r00      [10]  370 	ld	hl,#_sp_2
+   02A3 22r10r00      [16]  371 	ld	((_sprite01 + 0x0002)), hl
+                            372 ;code.c:178: sprite01.sp0=sp_2;
+   02A6 22r0Er00      [16]  373 	ld	(_sprite01), hl
+                            374 ;code.c:179: sprite01.ox=50;
+   02A9 21r18r00      [10]  375 	ld	hl,#(_sprite01 + 0x000a)
+   02AC 36 32         [10]  376 	ld	(hl),#0x32
+                            377 ;code.c:180: sprite01.oy=106;
+   02AE 21r19r00      [10]  378 	ld	hl,#(_sprite01 + 0x000b)
+   02B1 36 6A         [10]  379 	ld	(hl),#0x6A
+                            380 ;code.c:181: sprite01.cx=50;
+   02B3 21r16r00      [10]  381 	ld	hl,#(_sprite01 + 0x0008)
+   02B6 36 32         [10]  382 	ld	(hl),#0x32
+                            383 ;code.c:182: sprite01.cy=106;
+   02B8 21r17r00      [10]  384 	ld	hl,#(_sprite01 + 0x0009)
+   02BB 36 6A         [10]  385 	ld	(hl),#0x6A
+                            386 ;code.c:183: sprite01.move=1;
+   02BD 21r1Br00      [10]  387 	ld	hl,#(_sprite01 + 0x000d)
+   02C0 36 01         [10]  388 	ld	(hl),#0x01
+                            389 ;code.c:184: sprite01.move1=3;
+   02C2 21r1Ar00      [10]  390 	ld	hl,#(_sprite01 + 0x000c)
+   02C5 36 03         [10]  391 	ld	(hl),#0x03
+                            392 ;code.c:185: cpc_SuperbufferAddress(p_sprites[1]);
+   02C7 21r2Cr00      [10]  393 	ld	hl, #(_p_sprites + 0x0002) + 0
+   02CA 7E            [ 7]  394 	ld	a,(hl)
+   02CB DD 77 FE      [19]  395 	ld	-2 (ix),a
+   02CE 23            [ 6]  396 	inc	hl
+   02CF 7E            [ 7]  397 	ld	a,(hl)
+   02D0 DD 77 FF      [19]  398 	ld	-1 (ix),a
+   02D3 E1            [10]  399 	pop	hl
+   02D4 E5            [11]  400 	push	hl
+   02D5 E5            [11]  401 	push	hl
+   02D6 CDr00r00      [17]  402 	call	_cpc_SuperbufferAddress
+   02D9 F1            [10]  403 	pop	af
+                            404 ;code.c:187: sprite02.sp1=sp_2;
+   02DA 21r83r00      [10]  405 	ld	hl,#_sp_2
+   02DD 22r1Er00      [16]  406 	ld	((_sprite02 + 0x0002)), hl
+                            407 ;code.c:188: sprite02.sp0=sp_2;
+   02E0 22r1Cr00      [16]  408 	ld	(_sprite02), hl
+                            409 ;code.c:189: sprite02.ox=20;
+   02E3 21r26r00      [10]  410 	ld	hl,#_sprite02 + 10
+   02E6 36 14         [10]  411 	ld	(hl),#0x14
+                            412 ;code.c:190: sprite02.oy=100;
+   02E8 21r27r00      [10]  413 	ld	hl,#_sprite02 + 11
+   02EB 36 64         [10]  414 	ld	(hl),#0x64
+                            415 ;code.c:191: sprite02.cx=20;
+   02ED 21r24r00      [10]  416 	ld	hl,#_sprite02 + 8
+   02F0 36 14         [10]  417 	ld	(hl),#0x14
+                            418 ;code.c:192: sprite02.cy=100;
+   02F2 21r25r00      [10]  419 	ld	hl,#(_sprite02 + 0x0009)
+   02F5 36 64         [10]  420 	ld	(hl),#0x64
+                            421 ;code.c:193: sprite02.move=2;
+   02F7 21r29r00      [10]  422 	ld	hl,#(_sprite02 + 0x000d)
+   02FA 36 02         [10]  423 	ld	(hl),#0x02
+                            424 ;code.c:194: sprite02.move1=3;
+   02FC 21r28r00      [10]  425 	ld	hl,#_sprite02 + 12
+   02FF 36 03         [10]  426 	ld	(hl),#0x03
+                            427 ;code.c:195: cpc_SuperbufferAddress(p_sprites[2]);
+   0301 21r2Er00      [10]  428 	ld	hl, #(_p_sprites + 0x0004) + 0
+   0304 7E            [ 7]  429 	ld	a,(hl)
+   0305 DD 77 FE      [19]  430 	ld	-2 (ix),a
+   0308 23            [ 6]  431 	inc	hl
+   0309 7E            [ 7]  432 	ld	a,(hl)
+   030A DD 77 FF      [19]  433 	ld	-1 (ix),a
+   030D E1            [10]  434 	pop	hl
+   030E E5            [11]  435 	push	hl
+   030F E5            [11]  436 	push	hl
+   0310 CDr00r00      [17]  437 	call	_cpc_SuperbufferAddress
+   0313 F1            [10]  438 	pop	af
+                            439 ;code.c:200: draw_tilemap();
+   0314 CDr94r01      [17]  440 	call	_draw_tilemap
+                            441 ;code.c:201: cpc_ShowTileMap();		//Show entire tile map in the screen
+   0317 CDr00r00      [17]  442 	call	_cpc_ShowTileMap
+                            443 ;code.c:202: print_credits();
+   031A CDrDAr01      [17]  444 	call	_print_credits
+                            445 ;code.c:203: cpc_SetTile(0,1,2);
+   031D 21 01 02      [10]  446 	ld	hl,#0x0201
+   0320 E5            [11]  447 	push	hl
+   0321 AF            [ 4]  448 	xor	a, a
+   0322 F5            [11]  449 	push	af
+   0323 33            [ 6]  450 	inc	sp
+   0324 CDr00r00      [17]  451 	call	_cpc_SetTile
+   0327 F1            [10]  452 	pop	af
+   0328 33            [ 6]  453 	inc	sp
+                            454 ;code.c:210: cpc_ShowTileMap();		//Show entire tile map in the screen
+   0329 CDr00r00      [17]  455 	call	_cpc_ShowTileMap
+                            456 ;code.c:211: while(1)
+   032C                     457 00138$:
+                            458 ;code.c:223: if (cpc_TestKey(0)==1 && sprite00.cx<60) sprite00.cx++;
+   032C 2E 00         [ 7]  459 	ld	l,#0x00
+   032E CDr00r00      [17]  460 	call	_cpc_TestKey
+   0331 2D            [ 4]  461 	dec	l
+   0332 20 0E         [12]  462 	jr	NZ,00102$
+   0334 21r08r00      [10]  463 	ld	hl, #(_sprite00 + 0x0008) + 0
+   0337 56            [ 7]  464 	ld	d,(hl)
+   0338 7A            [ 4]  465 	ld	a,d
+   0339 D6 3C         [ 7]  466 	sub	a, #0x3C
+   033B 30 05         [12]  467 	jr	NC,00102$
+   033D 14            [ 4]  468 	inc	d
+   033E 21r08r00      [10]  469 	ld	hl,#(_sprite00 + 0x0008)
+   0341 72            [ 7]  470 	ld	(hl),d
+   0342                     471 00102$:
+                            472 ;code.c:224: if (cpc_TestKey(1)==1 && sprite00.cx>0) sprite00.cx--;
+   0342 2E 01         [ 7]  473 	ld	l,#0x01
+   0344 CDr00r00      [17]  474 	call	_cpc_TestKey
+   0347 2D            [ 4]  475 	dec	l
+   0348 20 0C         [12]  476 	jr	NZ,00105$
+                            477 ;code.c:223: if (cpc_TestKey(0)==1 && sprite00.cx<60) sprite00.cx++;
+   034A 3Ar08r00      [13]  478 	ld	a, (#(_sprite00 + 0x0008) + 0)
+                            479 ;code.c:224: if (cpc_TestKey(1)==1 && sprite00.cx>0) sprite00.cx--;
+   034D B7            [ 4]  480 	or	a, a
+   034E 28 06         [12]  481 	jr	Z,00105$
+   0350 C6 FF         [ 7]  482 	add	a,#0xFF
+   0352 21r08r00      [10]  483 	ld	hl,#(_sprite00 + 0x0008)
+   0355 77            [ 7]  484 	ld	(hl),a
+   0356                     485 00105$:
+                            486 ;code.c:225: if (cpc_TestKey(2)==1 && sprite00.cy>0) sprite00.cy-=2;
+   0356 2E 02         [ 7]  487 	ld	l,#0x02
+   0358 CDr00r00      [17]  488 	call	_cpc_TestKey
+   035B 2D            [ 4]  489 	dec	l
+   035C 20 0C         [12]  490 	jr	NZ,00108$
+   035E 3Ar09r00      [13]  491 	ld	a, (#(_sprite00 + 0x0009) + 0)
+   0361 B7            [ 4]  492 	or	a, a
+   0362 28 06         [12]  493 	jr	Z,00108$
+   0364 C6 FE         [ 7]  494 	add	a,#0xFE
+   0366 21r09r00      [10]  495 	ld	hl,#(_sprite00 + 0x0009)
+   0369 77            [ 7]  496 	ld	(hl),a
+   036A                     497 00108$:
+                            498 ;code.c:226: if (cpc_TestKey(3)==1 && sprite00.cy<112) sprite00.cy+=2;
+   036A 2E 03         [ 7]  499 	ld	l,#0x03
+   036C CDr00r00      [17]  500 	call	_cpc_TestKey
+   036F 2D            [ 4]  501 	dec	l
+   0370 20 0F         [12]  502 	jr	NZ,00111$
+                            503 ;code.c:225: if (cpc_TestKey(2)==1 && sprite00.cy>0) sprite00.cy-=2;
+   0372 21r09r00      [10]  504 	ld	hl, #(_sprite00 + 0x0009) + 0
+   0375 56            [ 7]  505 	ld	d,(hl)
+                            506 ;code.c:226: if (cpc_TestKey(3)==1 && sprite00.cy<112) sprite00.cy+=2;
+   0376 7A            [ 4]  507 	ld	a,d
+   0377 D6 70         [ 7]  508 	sub	a, #0x70
+   0379 30 06         [12]  509 	jr	NC,00111$
+   037B 14            [ 4]  510 	inc	d
+   037C 14            [ 4]  511 	inc	d
+   037D 21r09r00      [10]  512 	ld	hl,#(_sprite00 + 0x0009)
+   0380 72            [ 7]  513 	ld	(hl),d
+   0381                     514 00111$:
+                            515 ;code.c:230: if (sprite01.move==0)   //0 = left, 1 = right
+   0381 21r1Br00      [10]  516 	ld	hl, #(_sprite01 + 0x000d) + 0
+   0384 7E            [ 7]  517 	ld	a,(hl)
+   0385 DD 77 FE      [19]  518 	ld	-2 (ix), a
+   0388 B7            [ 4]  519 	or	a, a
+   0389 20 18         [12]  520 	jr	NZ,00117$
+                            521 ;code.c:232: if (sprite01.cx>0) sprite01.cx--;
+   038B 3Ar16r00      [13]  522 	ld	a,(#(_sprite01 + 0x0008) + 0)
+   038E DD 77 FE      [19]  523 	ld	-2 (ix), a
+   0391 B7            [ 4]  524 	or	a, a
+   0392 28 0A         [12]  525 	jr	Z,00114$
+   0394 DD 56 FE      [19]  526 	ld	d,-2 (ix)
+   0397 15            [ 4]  527 	dec	d
+   0398 21r16r00      [10]  528 	ld	hl,#(_sprite01 + 0x0008)
+   039B 72            [ 7]  529 	ld	(hl),d
+   039C 18 05         [12]  530 	jr	00117$
+   039E                     531 00114$:
+                            532 ;code.c:233: else sprite01.move=1;
+   039E 21r1Br00      [10]  533 	ld	hl,#(_sprite01 + 0x000d)
+   03A1 36 01         [10]  534 	ld	(hl),#0x01
+   03A3                     535 00117$:
+                            536 ;code.c:235: if (sprite01.move==1)   //0 = left, 1 = right
+   03A3 3Ar1Br00      [13]  537 	ld	a, (#(_sprite01 + 0x000d) + 0)
+   03A6 3D            [ 4]  538 	dec	a
+   03A7 20 15         [12]  539 	jr	NZ,00122$
+                            540 ;code.c:232: if (sprite01.cx>0) sprite01.cx--;
+   03A9 21r16r00      [10]  541 	ld	hl, #(_sprite01 + 0x0008) + 0
+   03AC 56            [ 7]  542 	ld	d,(hl)
+                            543 ;code.c:237: if (sprite01.cx<60) sprite01.cx++;
+   03AD 7A            [ 4]  544 	ld	a,d
+   03AE D6 3C         [ 7]  545 	sub	a, #0x3C
+   03B0 30 07         [12]  546 	jr	NC,00119$
+   03B2 14            [ 4]  547 	inc	d
+   03B3 21r16r00      [10]  548 	ld	hl,#(_sprite01 + 0x0008)
+   03B6 72            [ 7]  549 	ld	(hl),d
+   03B7 18 05         [12]  550 	jr	00122$
+   03B9                     551 00119$:
+                            552 ;code.c:238: else sprite01.move=0;
+   03B9 21r1Br00      [10]  553 	ld	hl,#(_sprite01 + 0x000d)
+   03BC 36 00         [10]  554 	ld	(hl),#0x00
+   03BE                     555 00122$:
+                            556 ;code.c:241: if (sprite02.move==2)   //2 = up, 3 = down
+   03BE 3Ar29r00      [13]  557 	ld	a, (#(_sprite02 + 0x000d) + 0)
+   03C1 D6 02         [ 7]  558 	sub	a, #0x02
+   03C3 20 13         [12]  559 	jr	NZ,00127$
+                            560 ;code.c:243: if (sprite02.cy>0) sprite02.cy-=2;
+   03C5 3Ar25r00      [13]  561 	ld	a, (#(_sprite02 + 0x0009) + 0)
+   03C8 B7            [ 4]  562 	or	a, a
+   03C9 28 08         [12]  563 	jr	Z,00124$
+   03CB C6 FE         [ 7]  564 	add	a,#0xFE
+   03CD 21r25r00      [10]  565 	ld	hl,#(_sprite02 + 0x0009)
+   03D0 77            [ 7]  566 	ld	(hl),a
+   03D1 18 05         [12]  567 	jr	00127$
+   03D3                     568 00124$:
+                            569 ;code.c:244: else sprite02.move=3;
+   03D3 21r29r00      [10]  570 	ld	hl,#(_sprite02 + 0x000d)
+   03D6 36 03         [10]  571 	ld	(hl),#0x03
+   03D8                     572 00127$:
+                            573 ;code.c:246: if (sprite02.move==3)    //2 = up, 3 = down
+   03D8 3Ar29r00      [13]  574 	ld	a, (#(_sprite02 + 0x000d) + 0)
+   03DB D6 03         [ 7]  575 	sub	a, #0x03
+   03DD 20 16         [12]  576 	jr	NZ,00132$
+                            577 ;code.c:243: if (sprite02.cy>0) sprite02.cy-=2;
+   03DF 21r25r00      [10]  578 	ld	hl, #(_sprite02 + 0x0009) + 0
+   03E2 56            [ 7]  579 	ld	d,(hl)
+                            580 ;code.c:248: if (sprite02.cy<106) sprite02.cy+=2;
+   03E3 7A            [ 4]  581 	ld	a,d
+   03E4 D6 6A         [ 7]  582 	sub	a, #0x6A
+   03E6 30 08         [12]  583 	jr	NC,00129$
+   03E8 14            [ 4]  584 	inc	d
+   03E9 14            [ 4]  585 	inc	d
+   03EA 21r25r00      [10]  586 	ld	hl,#(_sprite02 + 0x0009)
+   03ED 72            [ 7]  587 	ld	(hl),d
+   03EE 18 05         [12]  588 	jr	00132$
+   03F0                     589 00129$:
+                            590 ;code.c:249: else sprite02.move=2;
+   03F0 21r29r00      [10]  591 	ld	hl,#(_sprite02 + 0x000d)
+   03F3 36 02         [10]  592 	ld	(hl),#0x02
+   03F5                     593 00132$:
+                            594 ;code.c:253: cpc_ResetTouchedTiles();		//clear touched tile table
+   03F5 CDr00r00      [17]  595 	call	_cpc_ResetTouchedTiles
+                            596 ;code.c:258: cpc_PutSpTileMap(p_sprites[0]);		//search the tiles where is and was the sprite
+   03F8 2Ar2Ar00      [16]  597 	ld	hl, (#_p_sprites + 0)
+   03FB CDr00r00      [17]  598 	call	_cpc_PutSpTileMap
+                            599 ;code.c:259: cpc_PutSpTileMap(p_sprites[1]);
+   03FE 2Ar2Cr00      [16]  600 	ld	hl, (#(_p_sprites + 0x0002) + 0)
+   0401 CDr00r00      [17]  601 	call	_cpc_PutSpTileMap
+                            602 ;code.c:260: cpc_PutSpTileMap(p_sprites[2]);
+   0404 2Ar2Er00      [16]  603 	ld	hl, (#(_p_sprites + 0x0004) + 0)
+   0407 CDr00r00      [17]  604 	call	_cpc_PutSpTileMap
+                            605 ;code.c:263: cpc_UpdScr(); 					//Update the screen to new situatio (show the touched tiles)
+   040A CDr00r00      [17]  606 	call	_cpc_UpdScr
+                            607 ;code.c:266: cpc_PutMaskSpTileMap2b(p_sprites[0]);	//Requires to move sprite with cpc_SpUpdX or cpc_SpUpdY
+   040D 2Ar2Ar00      [16]  608 	ld	hl, (#_p_sprites + 0)
+   0410 CDr00r00      [17]  609 	call	_cpc_PutMaskSpTileMap2b
+                            610 ;code.c:267: cpc_PutMaskSpTileMap2b(p_sprites[1]);
+   0413 2Ar2Cr00      [16]  611 	ld	hl, (#(_p_sprites + 0x0002) + 0)
+   0416 CDr00r00      [17]  612 	call	_cpc_PutMaskSpTileMap2b
+                            613 ;code.c:268: cpc_PutMaskSpTileMap2b(p_sprites[2]);
+   0419 2Ar2Er00      [16]  614 	ld	hl, (#(_p_sprites + 0x0004) + 0)
+   041C CDr00r00      [17]  615 	call	_cpc_PutMaskSpTileMap2b
+                            616 ;code.c:270: cpc_ShowTileMap2();			//Show the touched tiles-> show the new sprite situatuion
+   041F CDr00r00      [17]  617 	call	_cpc_ShowTileMap2
+                            618 ;code.c:274: if (cpc_CollSp(p_sprites[0],p_sprites[1])) collide();  //test if there is collision between sprite00 and sprite01
+   0422 ED 5Br2Cr00   [20]  619 	ld	de, (#(_p_sprites + 0x0002) + 0)
+   0426 2Ar2Ar00      [16]  620 	ld	hl, (#_p_sprites + 0)
+   0429 D5            [11]  621 	push	de
+   042A E5            [11]  622 	push	hl
+   042B CDr00r00      [17]  623 	call	_cpc_CollSp
+   042E 7D            [ 4]  624 	ld	a,l
+   042F B7            [ 4]  625 	or	a, a
+   0430 28 03         [12]  626 	jr	Z,00134$
+   0432 CDr82r01      [17]  627 	call	_collide
+   0435                     628 00134$:
+                            629 ;code.c:275: if (cpc_CollSp(p_sprites[0],p_sprites[2])) collide();
+   0435 ED 5Br2Er00   [20]  630 	ld	de, (#(_p_sprites + 0x0004) + 0)
+   0439 2Ar2Ar00      [16]  631 	ld	hl, (#_p_sprites + 0)
+   043C D5            [11]  632 	push	de
+   043D E5            [11]  633 	push	hl
+   043E CDr00r00      [17]  634 	call	_cpc_CollSp
+   0441 7D            [ 4]  635 	ld	a,l
+   0442 B7            [ 4]  636 	or	a, a
+   0443 CAr2Cr03      [10]  637 	jp	Z,00138$
+   0446 CDr82r01      [17]  638 	call	_collide
+   0449 C3r2Cr03      [10]  639 	jp	00138$
+                            640 	.area _CODE
+                            641 	.area _INITIALIZER
+                            642 	.area _CABS (ABS)

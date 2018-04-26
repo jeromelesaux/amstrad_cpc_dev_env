@@ -1,0 +1,272 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           gphstr
+     00000000  l__BSS                          
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__GSINIT                       
+     00000000  l__HEADER                       
+     00000000  l__HEAP                         
+     00000000  l__HOME                         
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000000  s__HEADER                       
+     00000000  s__HEADER0                      
+     00000000  s__HEADER1                      
+     00000001  l__GSFINAL                      
+     00000002  l__INITIALIZED                  
+     00000002  l__INITIALIZER                  
+     00000003  l__HEADER0                      
+     00000009  l__HEADER1                      
+     00000038  ancho_pantalla_bytes               tilemap
+     00000100  posicion_inicial_superbuffer       tilemap
+     000001B2  l__DATA                         
+     0000273B  l__CODE                         
+     00006038  s__CODE                         
+     00008773  s__DATA                         
+     00008925  s__INITIALIZED                  
+     00008927  s__GSFINAL                      
+     00008927  s__GSINIT                       
+     00008927  s__HOME                         
+     00008928  s__INITIALIZER                  
+     0000892A  s__BSS                          
+     0000892A  s__HEAP                         
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00006038    0000273B =       10043. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00006038  _drawColumnD                       code
+     00006065  _test_map2                         code
+     000067E5  _paleta                            code
+     000067F6  _bloques                           code
+     0000686A  _spnave                            code
+     00006950  _prota                             code
+     000069FC  _prota0                            code
+     00006AA8  _protai                            code
+     00006B54  _protai0                           code
+     00006C00  _protas0                           code
+     00006CAC  _protas1                           code
+     00006DE6  _drawColumnI                       code
+     00006F6A  _initPointers                      code
+     00006F7D  _ANCHO_PANTALLA_SC                 code
+     00006F7F  _TILES_ANCHO_TOT                   code
+     00006F80  _setScreen                         code
+     00006FA6  _ScrClr                            code
+     00006FB4  _set_colours                       code
+     00006FD2  _pause                             code
+     00006FD8  _collide                           code
+     00006FEA  _draw_bloque                       code
+     00007063  _draw_tilemap                      code
+     0000709C  _print_credits                     code
+     00007116  _actualizaPantalla                 code
+     00007353  _act_visible                       code
+     00007477  _main                              code
+     000077F8  __clock                            crt0
+     000077F9  _exit                              crt0
+     000077FA  _posiciones_pantalla               tilemap
+     00007822  _posiciones_super_buffer           tilemap
+     0000784C  _pantalla_juego                    tilemap
+     000079D5  _tiles_tocados                     tilemap
+     00007A6B  _tabla_y_ancho_pantalla            tilemap
+     00007A93  _tiles                             tilemap
+     00007DF3  _cpc_ScrollRight00                 tilemap
+     00007E05  _cpc_ShowTileMap                   tilemap
+     00007EAF  _cpc_ScrollRight01                 tilemap
+     00007ED7  _cpc_ResetTouchedTiles             tilemap
+     00007EDD  _cpc_UpdScr                        tilemap
+     00007F65  _cpc_PrintGphStrXY                 gphstr
+     00007F77  _cpc_ScrollLeft00                  tilemap
+     00007F89  _cpc_ScrollLeft01                  tilemap
+     00007FB1  terminar_impresion                 gphstr
+     00007FB6  entrar_cola_impresion              gphstr
+     00007FB7  add_elemento                       gphstr
+     00007FDA  leer_elemento                      gphstr
+     00007FFD  elementos_cola                     gphstr
+     00007FFF  pos_cola                           gphstr
+     0000800D  imprimiendo                        gphstr
+     0000800E  _cpc_UpdTileTable                  tilemap
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00006038    0000273B =       10043. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000802F  _cpc_SetColour                     video
+     0000803F  _cpc_ShowTileMap2                  tilemap
+     0000804A  posicion_inicio_pantalla_visible   tilemap
+     0000804D  posicion_inicio_pantalla_visible   tilemap
+     000080FB  creascanes                         tilemap
+     000080FF  posicion_inicio_pantalla_visible   tilemap
+     00008272  _cpc_SetInkGphStr                  gphstr
+     0000827E  _cpc_PutSpTileMap                  tilemap
+     000082DC  letra_decodificada                 gphstr
+     000082EC  letra_decodificada_tmp             gphstr
+     0000830C  colores_b0                         gphstr
+     00008310  _cpc_Chars                         gphstr
+     00008478  _cpc_DisableFirmware               utils
+     00008487  _backup_fw                         utils
+     00008489  _cpc_SetMode                       video
+     00008493  _cpc_SetTile                       tilemap
+     000084B0  _cpc_GetScrAddress                 video
+     000084B4  _cpc_GetScrAddress0                video
+     0000851E  _cpc_PrintGphStr0M1                gphstr
+     000085E3  colores_m1                         gphstr
+     000085ED  _cpc_PutMaskSpTileMap2b            tilemap
+     00008646  _cpc_TestKey                       keyboard
+     00008660  _cpc_TestKeyboard                  keyboard
+     00008684  linea                              keyboard
+     00008685  bte                                keyboard
+     00008686  keymap                             keyboard
+     00008690  tecla_0                            keyboard
+     00008692  tabla_teclas                       keyboard
+     000086B3  _cpc_PrintGphStr0                  gphstr
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               00008773    000001B2 =         434. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00008773  _disparo                           code
+     000087D3  _edisparo                          code
+     00008833  _sprite                            code
+     0000884A  _nave                              code
+     00008861  _sprite00                          code
+     00008878  _sprite01                          code
+     0000888F  _sprite02                          code
+     000088A6  _sc                                code
+     000088A7  _d                                 code
+     000088A8  _e                                 code
+     000088A9  _f                                 code
+     000088AA  _vs1                               code
+     000088AB  _vs2                               code
+     000088AC  _col                               code
+     000088AE  _colMax                            code
+     000088B0  _p_nave                            code
+     000088B2  _p_sprite                          code
+     000088C6  _p_disparo                         code
+     000088DA  _pilaEnemigos                      code
+     00008916  _nPila                             code
+     00008917  _p_sprites                         code
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZED                        00008925    00000002 =           2. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00008925  _pointerH                          code
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSINIT                             00008927    00000000 =           0. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00008927  gsinit                             crt0
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSFINAL                            00008927    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZER                        00008928    00000002 =           2. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER0                            00000000    00000003 =           3. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER1                            00000000    00000009 =           9. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+
+Files Linked                              [ module(s) ]
+
+code.rel                                  [ code ]
+crt0_cpc.rel                              [ crt0 ]
+
+
+Libraries Linked                          [ object file ]
+
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_TileMapV.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ScrollRight00.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ShowTileMap.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ScrollRight01.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ResetTouchedTiles.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_UpdScr.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintGphStrXY.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ScrollLeft00.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ScrollLeft01.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ColaImpresion.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_UpdTileTable.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetColour.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ShowTileMap2.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetInkGphStr.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PutSpTileMap.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_Chars.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_DisableFirmware.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetMode.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetTile.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_GetScrAddress.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintGphStr0M1.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PutMaskSpTileMap2b.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_TestKey.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_TestKeyboard.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_keyboardVar.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintGphStr0.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+
+User Base Address Definitions
+
+_CODE = 0x6038
+_DATA = 0x0000
+
+

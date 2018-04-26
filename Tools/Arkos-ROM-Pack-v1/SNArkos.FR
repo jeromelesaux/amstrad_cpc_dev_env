@@ -1,0 +1,234 @@
+SNArkos by Grim/Arkos
+---v1.4 [20060204]---
+
+SNArkos est un petit utilitaire permettant de  transférer des fichiers  .SNA  de
+votre PC sur votre CPC via la CPCBooster.
+
+Prérequis:
+----------
+
+Une CPCBooster avec le dernier BIOS (update 3).
+Une RAMcard ou ROMcard
+AFT lancé sur le PC
+(Ceux qui trouvent que ça fait beaucoup de choses, je trouve qu'ils en font bien
+peu. C'est probablement lié)
+
+Pour avoir plus d'informations sur SNArkos ou la CPCBooster, allez jeter un oeil
+sur ces sites web :
+
+http://dirtyminds.cpcscene.com
+http://arkos.cpcscene.com
+
+License: sceneLegacyWare.
+Si vous avez quoique ce soit relatif à la scène (demo, discmag, crack, ...)  sur
+vos vieilles disquettes, faites  en des   DSK (sur 42 pistes, avec  ReadDSK  par
+exemple :) et envoyez les à grim@cpcscene.com
+
+
+--------------------------------------------------------------------------------
+
+
+Qu'est-ce qu'un .SNA ?
+----------------------
+
+Un  .SNA  (aussi appelé  "snapshot") est  un format  de fichier  utilisé par les
+émulateurs   ou autre  outil de  developpent (createSnapshot  par exemple)  afin
+de stocker l'état complet (RAM et contexte des différents circuits) d'un  CPC  à
+un moment donné.
+
+SNArkos gère correctement les différentes versions du format .SNA  (v1.0 à v3.0)
+dont les spécifications sont disponible en anglais sur le site web suivant :
+http://andercheran.aiind.upv.es/~amstrad/docs/snapshot.html
+
+
+Comment utiliser SNArkos ?
+--------------------------
+
+Il est OBLIGATOIRE que AFT soit préalablement lancé coté PC.
+
+-Charger un SNA sur CPC
+
+  ùsna,"maurice.sna"
+  Va charger le snapshot "maurice.sna" sur votre CPC.
+
+  L'extension du fichier est facultative. SNArkos l'ajoutera  automatiquement si
+  elle n'est pas fournie :
+
+  ùsna,"maurice"
+  Va aussi charger le snapshot "maurice.sna" sur votre CPC.
+
+
+
+-SNArkos gère un deuxième paramètre, l'autoboot :
+
+  ùsna,"maurice.sna",1 
+  Va charger le  snapshot "maurice.sna" sur  votre CPC en  activant  l'autoboot,
+  ce  qui    va  automatiser    le  chargement    de  ce    snapshot  à   chaque
+  initialisation du firmware (en language commun, aprés un reset du CPC).
+
+  Lorsque l'autoboot est activé, vous  pouvez annuler le chargement du  snapshot
+  en  maintenant  la   touche CTRL   lors de   l'initialisation du   firmware ou
+  désactiver l'autoboot en maintenant la touche CLR.
+
+  Si vous  ne voyez  aucun interêt  à cette  fonctionnalité,  oubliez  la,  elle
+  n'est pas nécessaire pour jouer à Bomb Jack :)
+
+
+
+-Vous pouvez aussi appeler SNArkos sans paramètre :
+
+  ùsna
+  Recharge le dernier snapshot utilisé ("snarkos.sna" est utilisé par défaut).
+
+
+
+-Initialisation du FDC
+  Lorsque  qu'un snapshot   est  transféré  sur  le  CPC, le   FDC peut  ne  pas
+  être  initialisé.  SNArkos  initialise  automatiquement   le  steprate  et  le
+  headload time mais, par défaut, ne recalibre pas le FDC ce qui, dans  certains
+  cas, peut  poser problème.
+
+  ùsnafdc,"A"
+  ùsnafdc,"B"
+
+  Avec  cette  commande,   SNArkos  recalibrera  (seektrack0)  le  FDC  avant le
+  transfert  du .SNA (compatible avec les lecteurs 80 pistes).
+
+
+
+-Information sur le dernier snapshot utilisé
+  Une  commande permet  d'afficher  les  informations stockées  dans  le  header
+  du fichier  snapshot, c'est  à dire  la valeur  des registres  des  différents
+  circuits du CPC.
+
+  ùsnah
+
+
+
+Si quelque chose ne va pas (nom de fichier trop long, timeout, problème avec AFT
+ou la CPCBooster, ...), SNArkos s'en plaindra immédiatement.
+
+Pendant le transfert,  si l'écran devient  rouge vif, c'est  qu'un timeout s'est
+produit. Vérifiez si tout est bien connecté et re-essayez.
+
+
+CrossDev
+--------
+
+SNArkos a initiallement été developpé comme un outil de cross-developpement afin
+de tester rapidement une routine sur un vrai CPC en se passant des émulateurs.
+Il  est donc maintenant possible d'éditer vos sources  assembleur sur PC  et  en
+quelque secondes seulement, assembler (zmac), créer un snapshot (createsnapshot)
+et transférer le tout sur votre CPC ! Plus besoin de s'embeter à  transférer des
+fichiers ou un dsk pour effectuer un simple test.
+
+Vous trouverez tout le nécessaire et même plus en utilisant CPCTools, disponible
+sur ces sites web :
+
+http://arkos.cpcscene.com 
+http://www.ramlaid.com
+
+Il peut  cependant être  utilisé pour  transférer rapidement  n'importe quoi  ou
+presque sur le CPC sans avoir à utiliser la moindre disquette.
+
+
+Informations techniques
+-----------------------
+
+SNArkos  utilise  la  RAM  embarquée  dans  la  CPCBooster  pour  y  stocker  sa
+configuration (nom du fichier, options, ...) et c'est pourquoi il est nécessaire
+d'avoir la dernière version du  BIOS (qui autorise la lecture/écriture de la RAM
+de la CPCBooster).
+
+-L'état du PPI n'est pas restauré.
+
+-Le repositionnement sur la piste courante du FDC n'est pas effectuée.
+
+-Il n'y a aucune détection materielle, vous pouvez envoyer un snapshot de  128Ko
+sur un  CPC muni  de seulement  64Ko. Ca  ne fera  que planter  le CPC.  Un test
+couterait de l'espace dans la ROM Arkos et est à mon avis inutile si vous  savez
+utiliser l'organe situé entre vos deux oreilles.
+
+-Les informations de synchronisation  (apparues dans la version 3 du format SNA)
+ne sont pas prise en compte. L'exécution sera effectuée dès que le snapshot  est
+prêt.
+
+-Les interruptions masquable sont désactivées pendant le transfert, puis,  celon
+l'état du registre IFF0, seront réactivées si nécéssaire  juste avant le  JUMP à
+l'adresse indiquée par PC (le registre Z80).  Dans  le  cas ou les interruptions
+sont  effectivement  réactivées,  cela implique  qu'une  interruption  aura trés
+probablement lieu  juste aprés  le JUMP  et juste  avant l'éxecution  du code  à
+l'adresse du JUMP.
+
+-16 octets sont utilisés dans la RAM du CPC pour y placer la routine d'exécution
+du snapshot (de &FFF0  à &FFFF). Ces octets  seront écrit  dans la  RAM celon la
+configuration RAM du snapshot (c'est à dire que cela peut être dans les 64Ko  de
+base ou dans les banks). Cela impose aussi une limitation : SNArkos refusera  de
+charger un snapshot dont la  ROM haute est activée (sa  routine d'initialisation
+du snapshot se retrouvant dans ce cas masquée par la ROM),  excluant  ainsi  les
+programmes BASIC en cours d'exécution (désolé SuperSly :).
+
+-Les chunks de données additionnelles introduit dans la version 3 du format .SNA
+ne sont pour le moment pas gérés (cf note sur le chunk "CPC+").
+
+-Les registres du AY3-8912, CRTC, GateArray et Z80 (sauf R) sont tous  restaurés
+ainsi que l'intégralité de la RAM correspondant aux pages de 64Ko fourni dans le
+snapshot.
+
+
+Comment faire un SNA qui fonctionne bien
+----------------------------------------
+
+Configurez correctement votre émulateur ou générateur de snapshot pour créer  un
+.SNA correspondant à la configuration de votre CPC (RAM et ROM principalement).
+
+En régle  générale, il est conseillé d'avoir les interruptions désactivées  (di)
+dans le snapshot et en particulier lorsque c'est le firmware qui les  prends  en
+charge.
+
+
+Lorsqu'il s'agit  de tester  des ruptures  ou tout  autre chose  nécessitant une
+synchro trés précise,  ne faite pas  le snapshot pendant  l'exécution mais avant
+(par exemple pendant l'initialisation de votre routine).
+
+Attention au FDC ! Si vous  utilisez une routine de chargement custom,  pensez à
+le recalibrer soit dans votre routine ou en utilisant la commande ùsnafdc.
+
+Le  registre  R  du  Z80  n'étant  pas  restauré,  votre  snapshot  peut  ne pas
+fonctionner  avec certaine  protection. Faite  votre snapshot  plus tard  (aprés
+l'exécution de la protection).
+
+Les vieilles  versions de  WinAPE (anterieures  à la  2.0A6) produisent  un .SNA
+corrompu (les valeurs des registres CRTC sont écrites sur 16bit au lieu de 8  et
+"dépassent" sur l'espace réservé aux données du PPI... bref... un gros merdier).
+Utilisez la dernière version de WinAPE (ou un autre émulateur comme WinCPC).
+
+Pour une raison encore   assez flou, le snapshot   d'un CPC en train  d'exécuter
+une  routine  du  firmware  (gestionnaire  d'interruption  en  particulier)  bug
+sévèrement. Cela sera  eventuellement  corrigé dans   une prochaine version mais
+rien n'est sûr (SNArkos étant un outil punk, il fuck the system).
+
+
+A propos du chunk "CPC+"
+------------------------
+
+Ce chunk est défini depuis la version 3 du format .SNA et permettrait de stocker
+l'état  de  l'ASIC des  AmstradPlus   et donc  de  le restaurer  par   la suite.
+Cependant, je n'ai trouvé  aucun émulateur  capable de gérer ce chunk et  par la
+même  de produire  un fichier  .SNA l'incluant.  J'ai donc  désactivé toute   la
+gestion de  ce chunk dans cette  version de SNArkos  faute d'avoir pu  la tester
+(Désolé Iron, tu vas aussi devoir coder ton propre émulateur AmstradPlus :).
+ 
+
+--------------------------------------------------------------------------------
+
+
+Si vous en êtes  à lire cette phrase  c'est trés bien car  toute  question   sur
+SNArkos  dont   la  réponse   se  trouve   dans  cette  doc  n'obtiendra  aucune
+réponse serieuse de ma part :)
+
+Merci à Antitec pour avoir dépanné plusieurs fois mes CPCBoosters :)
+
+Bon code !
+
+															Grim/Arkos

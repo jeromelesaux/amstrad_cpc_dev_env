@@ -1,0 +1,242 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.5.2 #9293 (MINGW64)
+                              4 ; This file was generated Tue Sep 15 21:10:42 2015
+                              5 ;--------------------------------------------------------
+                              6 	.module code
+                              7 	.optsdcc -mz80
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _wait
+                             14 	.globl _cpc_RedefineKey
+                             15 	.globl _cpc_TestKey
+                             16 	.globl _cpc_AssignKey
+                             17 	.globl _cpc_AnyKeyPressed
+                             18 	.globl _cpc_PrintStr
+                             19 	.globl _cpc_SetBorder
+                             20 	.globl _cpc_SetModo
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                             24 ;--------------------------------------------------------
+                             25 ; ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DATA
+                             28 ;--------------------------------------------------------
+                             29 ; ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _INITIALIZED
+                             32 ;--------------------------------------------------------
+                             33 ; absolute external ram data
+                             34 ;--------------------------------------------------------
+                             35 	.area _DABS (ABS)
+                             36 ;--------------------------------------------------------
+                             37 ; global & static initialisations
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _GSINIT
+                             41 	.area _GSFINAL
+                             42 	.area _GSINIT
+                             43 ;--------------------------------------------------------
+                             44 ; Home
+                             45 ;--------------------------------------------------------
+                             46 	.area _HOME
+                             47 	.area _HOME
+                             48 ;--------------------------------------------------------
+                             49 ; code
+                             50 ;--------------------------------------------------------
+                             51 	.area _CODE
+                             52 ;code.c:5: void wait(void){
+                             53 ;	---------------------------------
+                             54 ; Function wait
+                             55 ; ---------------------------------
+   0000                      56 _wait::
+                             57 ;code.c:13: __endasm;
+   0000                      58 	 _kkk:
+   0000 06 64         [ 7]   59 	ld b,#100
+   0002                      60 	 llll:
+   0002 76            [ 4]   61 	halt
+   0003 10 FD         [13]   62 	djnz llll
+   0005 C9            [10]   63 	ret
+                             64 ;code.c:16: main()
+                             65 ;	---------------------------------
+                             66 ; Function main
+                             67 ; ---------------------------------
+   0006                      68 _main::
+                             69 ;code.c:18: cpc_SetModo(1);
+   0006 2E 01         [ 7]   70 	ld	l,#0x01
+   0008 CDr00r00      [17]   71 	call	_cpc_SetModo
+                             72 ;code.c:20: cpc_AssignKey(4,0x4804);		// key "ESC"
+   000B 21 04 48      [10]   73 	ld	hl,#0x4804
+   000E E5            [11]   74 	push	hl
+   000F 3E 04         [ 7]   75 	ld	a,#0x04
+   0011 F5            [11]   76 	push	af
+   0012 33            [ 6]   77 	inc	sp
+   0013 CDr00r00      [17]   78 	call	_cpc_AssignKey
+   0016 F1            [10]   79 	pop	af
+   0017 33            [ 6]   80 	inc	sp
+                             81 ;code.c:22: cpc_PrintStr("Welcome to cpcrslib keyboard utilities.");
+   0018 21rA5r00      [10]   82 	ld	hl,#___str_0
+   001B CDr00r00      [17]   83 	call	_cpc_PrintStr
+                             84 ;code.c:23: cpc_PrintStr("Press a Key to redefine as #1");
+   001E 21rCDr00      [10]   85 	ld	hl,#___str_1
+   0021 CDr00r00      [17]   86 	call	_cpc_PrintStr
+                             87 ;code.c:24: cpc_RedefineKey(0);		//redefine key. There are 12 available keys (0..11)
+   0024 2E 00         [ 7]   88 	ld	l,#0x00
+   0026 CDr00r00      [17]   89 	call	_cpc_RedefineKey
+                             90 ;code.c:25: cpc_PrintStr("Done!");
+   0029 21rEBr00      [10]   91 	ld	hl,#___str_2
+   002C CDr00r00      [17]   92 	call	_cpc_PrintStr
+                             93 ;code.c:28: cpc_PrintStr("Now, press any key to continue");
+   002F 21rF1r00      [10]   94 	ld	hl,#___str_3
+   0032 CDr00r00      [17]   95 	call	_cpc_PrintStr
+                             96 ;code.c:29: while(!(cpc_AnyKeyPressed())){}
+   0035                      97 00101$:
+   0035 CDr00r00      [17]   98 	call	_cpc_AnyKeyPressed
+   0038 7C            [ 4]   99 	ld	a,h
+   0039 B5            [ 4]  100 	or	a,l
+   003A 28 F9         [12]  101 	jr	Z,00101$
+                            102 ;code.c:31: cpc_PrintStr("Well done! Let's do it again");
+   003C 21r10r01      [10]  103 	ld	hl,#___str_4
+   003F CDr00r00      [17]  104 	call	_cpc_PrintStr
+                            105 ;code.c:33: cpc_PrintStr("Press any key to continue");
+   0042 21r2Dr01      [10]  106 	ld	hl,#___str_5
+   0045 CDr00r00      [17]  107 	call	_cpc_PrintStr
+                            108 ;code.c:34: while(!(cpc_AnyKeyPressed())){}
+   0048                     109 00104$:
+   0048 CDr00r00      [17]  110 	call	_cpc_AnyKeyPressed
+   004B 7C            [ 4]  111 	ld	a,h
+   004C B5            [ 4]  112 	or	a,l
+   004D 28 F9         [12]  113 	jr	Z,00104$
+                            114 ;code.c:37: cpc_PrintStr("Press a Key to redefine as #3");
+   004F 21r47r01      [10]  115 	ld	hl,#___str_6
+   0052 CDr00r00      [17]  116 	call	_cpc_PrintStr
+                            117 ;code.c:38: cpc_RedefineKey(3);		//redefine key. There are 12 available keys (0..11)
+   0055 2E 03         [ 7]  118 	ld	l,#0x03
+   0057 CDr00r00      [17]  119 	call	_cpc_RedefineKey
+                            120 ;code.c:39: cpc_PrintStr("Done!");
+   005A 21rEBr00      [10]  121 	ld	hl,#___str_2
+   005D CDr00r00      [17]  122 	call	_cpc_PrintStr
+                            123 ;code.c:42: wait();
+   0060 CDr00r00      [17]  124 	call	_wait
+                            125 ;code.c:43: cpc_SetModo(1);
+   0063 2E 01         [ 7]  126 	ld	l,#0x01
+   0065 CDr00r00      [17]  127 	call	_cpc_SetModo
+                            128 ;code.c:45: cpc_SetBorder(3);
+   0068 2E 03         [ 7]  129 	ld	l,#0x03
+   006A CDr00r00      [17]  130 	call	_cpc_SetBorder
+                            131 ;code.c:47: cpc_PrintStr("Now let's test the selected keys. Press ESC to EXIT");
+   006D 21r65r01      [10]  132 	ld	hl,#___str_7
+   0070 CDr00r00      [17]  133 	call	_cpc_PrintStr
+                            134 ;code.c:49: cpc_PrintStr("Press a Key to test it..");
+   0073 21r99r01      [10]  135 	ld	hl,#___str_8
+   0076 CDr00r00      [17]  136 	call	_cpc_PrintStr
+                            137 ;code.c:50: while (!cpc_TestKey(4)) { // IF NOT ESC is pressed
+   0079                     138 00111$:
+   0079 2E 04         [ 7]  139 	ld	l,#0x04
+   007B CDr00r00      [17]  140 	call	_cpc_TestKey
+   007E 7D            [ 4]  141 	ld	a,l
+                            142 ;code.c:52: if (cpc_TestKey(0)) {	//test if the key has been pressed.
+   007F B7            [ 4]  143 	or	a,a
+   0080 20 1F         [12]  144 	jr	NZ,00113$
+   0082 6F            [ 4]  145 	ld	l,a
+   0083 CDr00r00      [17]  146 	call	_cpc_TestKey
+   0086 7D            [ 4]  147 	ld	a,l
+   0087 B7            [ 4]  148 	or	a, a
+   0088 28 06         [12]  149 	jr	Z,00108$
+                            150 ;code.c:53: cpc_PrintStr("OK Key #1");
+   008A 21rB2r01      [10]  151 	ld	hl,#___str_9
+   008D CDr00r00      [17]  152 	call	_cpc_PrintStr
+   0090                     153 00108$:
+                            154 ;code.c:55: if (cpc_TestKey(3)) {	//test if the key has been pressed.
+   0090 2E 03         [ 7]  155 	ld	l,#0x03
+   0092 CDr00r00      [17]  156 	call	_cpc_TestKey
+   0095 7D            [ 4]  157 	ld	a,l
+   0096 B7            [ 4]  158 	or	a, a
+   0097 28 E0         [12]  159 	jr	Z,00111$
+                            160 ;code.c:56: cpc_PrintStr("OK Key #2");
+   0099 21rBCr01      [10]  161 	ld	hl,#___str_10
+   009C CDr00r00      [17]  162 	call	_cpc_PrintStr
+   009F 18 D8         [12]  163 	jr	00111$
+   00A1                     164 00113$:
+                            165 ;code.c:60: return 0;
+   00A1 21 00 00      [10]  166 	ld	hl,#0x0000
+   00A4 C9            [10]  167 	ret
+   00A5                     168 ___str_0:
+   00A5 57 65 6C 63 6F 6D   169 	.ascii "Welcome to cpcrslib keyboard utilities."
+        65 20 74 6F 20 63
+        70 63 72 73 6C 69
+        62 20 6B 65 79 62
+        6F 61 72 64 20 75
+        74 69 6C 69 74 69
+        65 73 2E
+   00CC 00                  170 	.db 0x00
+   00CD                     171 ___str_1:
+   00CD 50 72 65 73 73 20   172 	.ascii "Press a Key to redefine as #1"
+        61 20 4B 65 79 20
+        74 6F 20 72 65 64
+        65 66 69 6E 65 20
+        61 73 20 23 31
+   00EA 00                  173 	.db 0x00
+   00EB                     174 ___str_2:
+   00EB 44 6F 6E 65 21      175 	.ascii "Done!"
+   00F0 00                  176 	.db 0x00
+   00F1                     177 ___str_3:
+   00F1 4E 6F 77 2C 20 70   178 	.ascii "Now, press any key to continue"
+        72 65 73 73 20 61
+        6E 79 20 6B 65 79
+        20 74 6F 20 63 6F
+        6E 74 69 6E 75 65
+   010F 00                  179 	.db 0x00
+   0110                     180 ___str_4:
+   0110 57 65 6C 6C 20 64   181 	.ascii "Well done! Let's do it again"
+        6F 6E 65 21 20 4C
+        65 74 27 73 20 64
+        6F 20 69 74 20 61
+        67 61 69 6E
+   012C 00                  182 	.db 0x00
+   012D                     183 ___str_5:
+   012D 50 72 65 73 73 20   184 	.ascii "Press any key to continue"
+        61 6E 79 20 6B 65
+        79 20 74 6F 20 63
+        6F 6E 74 69 6E 75
+        65
+   0146 00                  185 	.db 0x00
+   0147                     186 ___str_6:
+   0147 50 72 65 73 73 20   187 	.ascii "Press a Key to redefine as #3"
+        61 20 4B 65 79 20
+        74 6F 20 72 65 64
+        65 66 69 6E 65 20
+        61 73 20 23 33
+   0164 00                  188 	.db 0x00
+   0165                     189 ___str_7:
+   0165 4E 6F 77 20 6C 65   190 	.ascii "Now let's test the selected keys. Press ESC to EXIT"
+        74 27 73 20 74 65
+        73 74 20 74 68 65
+        20 73 65 6C 65 63
+        74 65 64 20 6B 65
+        79 73 2E 20 50 72
+        65 73 73 20 45 53
+        43 20 74 6F 20 45
+        58 49 54
+   0198 00                  191 	.db 0x00
+   0199                     192 ___str_8:
+   0199 50 72 65 73 73 20   193 	.ascii "Press a Key to test it.."
+        61 20 4B 65 79 20
+        74 6F 20 74 65 73
+        74 20 69 74 2E 2E
+   01B1 00                  194 	.db 0x00
+   01B2                     195 ___str_9:
+   01B2 4F 4B 20 4B 65 79   196 	.ascii "OK Key #1"
+        20 23 31
+   01BB 00                  197 	.db 0x00
+   01BC                     198 ___str_10:
+   01BC 4F 4B 20 4B 65 79   199 	.ascii "OK Key #2"
+        20 23 32
+   01C5 00                  200 	.db 0x00
+                            201 	.area _CODE
+                            202 	.area _INITIALIZER
+                            203 	.area _CABS (ABS)

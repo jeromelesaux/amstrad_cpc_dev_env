@@ -1,0 +1,48 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 ___str_0                                                       00A5 R
+  0 ___str_1                                                       00CD R
+  0 ___str_10                                                      01BC R
+  0 ___str_2                                                       00EB R
+  0 ___str_3                                                       00F1 R
+  0 ___str_4                                                       0110 R
+  0 ___str_5                                                       012D R
+  0 ___str_6                                                       0147 R
+  0 ___str_7                                                       0165 R
+  0 ___str_8                                                       0199 R
+  0 ___str_9                                                       01B2 R
+    _cpc_AnyKeyPressed                                             **** GX
+    _cpc_AssignKey                                                 **** GX
+    _cpc_PrintStr                                                  **** GX
+    _cpc_RedefineKey                                               **** GX
+    _cpc_SetBorder                                                 **** GX
+    _cpc_SetModo                                                   **** GX
+    _cpc_TestKey                                                   **** GX
+  0 _kkk                                                           0000 R
+  0 _main                                                          0006 GR
+  0 _wait                                                          0000 GR
+  0 llll                                                           0002 R
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size  1C6   flags    0
+   1 _DATA                                      size    0   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

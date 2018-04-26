@@ -1,0 +1,104 @@
+READDSK V1.0
+------------
+By Targhan/Arkos
+
+
+This tool allows the creation of a DSK, read on CPC, and saved  directly  on  PC
+(like CPDread or CPCTrans can do, but better :). Contrary to  WriteDSK,  ReadDSK
+requires a CPCBooster+.
+
+
+Features :
+----------
+- Recognises all standard CPC format, from size 1 to 6. In accordance  with  the
+DSK format description, size 6 sectors are only &1800 bytes long.
+- Defective (or size 0) sectors are skippable, in which case a blank  sector  is
+added to the DSK, and flags written accordingly.
+- Erased sectors are recognised.
+- The Demo or 5KBDemo3 type Format are recognised.
+- Generated DSK format is Extended.
+- Double   sided  DSKs  are  generable  (Parados  disc  transfert  is  therefore
+possible).
+
+
+
+HOW TO USE IT
+-------------
+|RDSK,"dskname","[Source][1/2]"
+
+Generates a DSK named "dskname" from the CPC Source drive to the PC through  the
+CPCBooster. If Source is ommited, drive A is used.
+The optional [1/2] parameter allows to select the side to  transfer.  '1'  means
+the second side of your disc, and '2' creates a double sided DSK.  Both  options
+requires a double sided drive of course. Moreover, be careful to set  your  side
+switch to side 0, else the side 0 won't  be  accessible  for  the  double  sided
+reading.
+
+When the PC ackownledges the successful opening of the DSK file in  the  current
+folder, the reading begins. Warning, take care not to replace any important file
+on your PC !
+
+Like WriteDSK, the sector list is displayed on the screen. For an explanation of
+these info, please refer to the WriteDSK manual. In the case of  'The  Demo'  or
+'5KBDemo 3' formats (samely named sectors), the reading will be  really  slower,
+because multiple passes are needed to read  the  sectors  in  the  right  order.
+Patience is a virtue :).
+
+For more information about the CPCBooster and the PC side, please read the  main
+documentation available on this disc.
+
+Examples :
+|RDSK,"dia.dsk"
+|RDSK,"midline.dsk","2"
+|RDSK,"bigofull.dsk","B1"
+
+
+
+TECHNICAL DETAILS
+-----------------
+When creating the DSK, the GAP is not 'tested' as, to my knowledge,  there's  no
+reliable and clean technic to do so, and in our case it would be quite  useless.
+The GAP is thus calculed according to the number  of  sectors  and  their  size,
+using the same table as WriteDSK. The result is reliable,  much  more  than  all
+these DSKs you can find on the net with a GAP forced to  #4E  (anyway,  WriteDSK
+corrects the GAP on writting, so there's no risk either).
+
+The Filler Byte is however set to #E5, as again there's no technic worth  using,
+as it would be useless.
+
+Some of you might be puzzled by  what  I  said  about  size  0  sectors.  To  my
+surprise, such sectors seem badly managed by the FDC. You can format  and  write
+them, no problem. Reading a size 0 sector you've just formatted loads  only  &50
+bytes of the Filler Byte, whereas &80 are expected ! Once you've written data on
+this sector (the writting operating seems  ok  according  to  the  flags),  it's
+impossible to read it : 'Bad Checksum'. The Leader Board protection confirms  my
+theories, one size 0 sector is declared as 'Bad Checksum',  and  it's  only  &50
+long ! The FDC from the PC that generated the DSK seems as  sick  as  the  CPC's
+one... Unless the problem comes from the CPC FDC while writting ?
+
+With ReadDSK, when reading a sector returns an error, I give the possibility  to
+Retry or Ignore. This gives the sector a chance to pass, if it was a bit  'old',
+or to continue the creation if it's completely unreadable. The Flags are written
+according to the result phase, anyway.
+
+
+
+
+----------------
+Once again, that's it !
+
+
+If you've any remarks or suggestions, write us here :
+targhan@cpcscene.com
+grim@cpcscene.com
+
+Visit the Arkos website to download our productions :
+www.arkos.cpcscene.com
+
+And here's the Dirty Minds site to order your future CPCBooster :
+www.dirtyminds.cpcscene.com
+
+
+
+Bye,
+Targhan/Arkos.

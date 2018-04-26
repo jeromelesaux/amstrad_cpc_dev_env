@@ -1,0 +1,10 @@
+
+Version 1.1
+- CC (Win32) Fixed crash when included file does not exist
+- Fixed crash when calling CC with a C file entirely created on a CPC
+- Fixed CS RSX-command usage. Now only ROM-based, but 100% safe.
+- Updated documentation with compiler internal section
+
+Version 1.0
+- Initial release..
+

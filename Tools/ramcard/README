@@ -1,0 +1,334 @@
+RAMCARD = Emulate expansion ROM with a backup RAM
+-------------------------------------------------
+
+French version follows !!!
+
+   The RAMCARD with a 128K RAM add 8 contiguous expansion ROM.
+   Writting is done directly from CPC, no need for an EPROM burner and
+   the content is protected with a lithium battery.
+
+
+1) Content
+----------
+
+   - README        = this text !!!
+   - ramcardc.pdf  = pcb view component
+   - ramcards.pdf  = pcb view soldering
+   - ramcard.pdf   = documentation in french
+   - ramcard.dsk   = CPC prog no ROM included
+
+
+2) Hardware
+-----------
+
+   * 6  R1-R4, R7, R9 = 10k
+   * 2  R5, R8        = 1k                       [2]
+   * 1  R6            = 100k
+   * 1  R10           = 47k
+   * 10 D1-D9, D12    = 1N4148                   [2]
+   * 2  D10, D11      = BAT85                    [1]
+   * 1  DZ            = zener 3,3V               [2]
+   * 1  T1            = BC547B
+   * 1  C1            = 1 microF                 [2]
+   * 3  C2, C3, C4    = 100 nF
+   * 1  C5            = 100 microF
+   * 1  IC1           = 74LS374 (dip20)
+   * 1  IC2           = 74LS00 (dip14)
+   * 1  IC3           = 74LS138 (dip16)
+   * 1  IC4           = RAM 128K or 32K (dip32)
+   * 1  IC5           = 74LS85 (dip16)
+   * 1  IC6           = 74LS32 (dip14)
+   * 2  DPSW1, DPSW2  = dipswitch 8
+   * 1  CON1          = HE10 male 50 pt
+   * 1  battery CR2032 + socket
+   * 1  HE10 female 50 pt + 10 cm ribbon cable
+   * 1  centronic/edge socket connector 50 pt
+
+     [1] diode low drop
+     [2] sometimes DZ can't save reliably IC4, see below for an alternative
+
+   All the RAMCARD cost around 45 Euros.
+
+
+3) Soldering
+------------
+
+   Soldering is done in the following order :
+     - resistors
+     - diodes
+     - straps (11 straps)
+     - IC sockets
+     - transistor
+     - dipswitch
+     - battery socket
+     - HE10 connector
+
+   Make the appropriate ribbon cable for your CPC (centronics/edge socket) and
+   HE10 female 50 pt. On the RAMCARD solder an HE10 male 50 pt.
+   Put all IC, you can use a 128K RAM or a 32K RAM. If you use a 32K RAM, be
+   carreful, a 32K RAM have 4 less pin than a 128K RAM, place it on the bottom
+   of the socket (the dip32's pin 1, 2, 31, 32 must be left unconnected).
+
+   Serveral modifications can be made, you can add an external switch to turn
+   on/off all ROM of the RAMCARD (don't forget to cut the wire), you can
+   replace all dipswitch by external switchs, you can add a reset switch.
+   Sometimes DZ isn't fast enough to put IC4 in a backup state, if you suffer
+   dataloss, the following changes can help :
+      - don't install C1
+      - don't install D12
+      - replace DZ by a 33k resistor
+      - replace R8 by a 33k resistor
+
+
+4) Testing and troubleshooting
+------------------------------
+
+   The RAMCARD must be connected CPC switched off.
+   For the first test, switch all dipswitch to off, as you wish install or
+   don't install the battery (the lithium battery is only needed to save data
+   when CPC is off).
+   Start your CPC, all must be working as usual, if don't switch off your CPC
+   and recheck pcb and cable.
+
+   Launch ROMTEST.BIN, this program will display all detected ROM (if any).
+   Start playing with DIPSW2, each switch control one ROM which must appear
+   after a few delay (5 seconds). If it doesn't, switch your CPC and check
+   soldering and cable.
+   Play also with DIPSW1's switch 1 -> 5, see how ROM number is changing.
+   DIPSW1 fix ROM number base adress, it controls the 5 most significant bit.
+   So to choose where you want your 8 contiguous ROM write your number in
+   binary and switch on / switch off accordingly.
+
+   Finaly, turn on DIPSW1's switch 8, the RAMCARD ROM number must appear in red
+   showing that the RAMCARD is open for writing.
+   This switch control/allow writing ('burning rom') in the RAMCARD for all
+   activated (by DIPSW2) ROM.
+
+   If it doesn't work as expected, search for a short-circuit on the pcb.
+   Try also to disconnect and reconnect the ribbon cable (CPC switched off,
+   of course), bad connection are often due to the socket edge connector.
+   If your RAMCARD pass all this test, congratulation, you are now entering
+   the rom's world !
+
+
+5) How it works
+---------------
+
+   The ROM number (port DFxx) is latched in a 74LS374 and decoded by the
+   74LS85 (5 MSB) and 74LS138.
+   When an access (read or write) is made to one RAMCARD's ROM, only one
+   (of 8) 74LS138's output goes low. DIPSW2 can forbid/pass the request.
+   The OR gate with the 74LS00 and 74LS32 control the access, if it's a read
+   ROMDIS is send back to CPC, if it's a write the request goes throw switch 8
+   DIPSW1.
+
+   The RAMCARD operate on memory range C000-FFFF, up to 8 contiguous ROM are
+   located by DIPSW1 :
+     - switch 1 = rom base 128
+     - switch 2 = rom base 64
+     - switch 3 = rom base 32
+     - switch 4 = rom base 16
+     - switch 5 = rom base 8
+     - switch 6 = not used
+     - switch 7 = not used
+     - switch 8 = global write on
+
+   Individual ROM are set by DIPSW2 :
+     - switch 1 = rom base+0 on/off
+     - switch 2 = rom base+1 on/off
+     - switch 3 = rom base+2 on/off
+     - switch 4 = rom base+3 on/off
+     - switch 5 = rom base+4 on/off
+     - switch 6 = rom base+5 on/off
+     - switch 7 = rom base+6 on/off
+     - switch 8 = rom base+7 on/off
+
+   Use RAMCARD.BAS to program a ROM into the RAMCARD. Writing is under user
+   control, turn on DIPSW1's switch 8 only when needed. When this switch is
+   on, all write to C000-FFFF in RAM will also be transmitted to the RAMCARD
+   if the ROM number match.
+
+
+6) Information
+--------------
+
+   For more information see ramcard.pdf (sorry it's in french, does anyone want
+   to translate ?), a great part is a 'how to program a ROM on CPC' and all
+   CPC source prog are included.
+
+   For any informations or suggestions you can also contact me on :
+     - ram7@cpcscene.com
+
+                                                               RAM7
+
+
+
+French version
+--------------
+
+   Une RAMCARD avec 128K de RAM ajoute 8 ROM d'extension a votre CPC.
+   La programmation se fait directement depuis le CPC, plus besoin de
+   programmateur d'EPROM et le contenu est sauvegarde par une pile au lithium.
+
+
+1) Contenu
+----------
+
+   - README        = ce fichier !!!
+   - ramcardc.pdf  = implantation des composants
+   - ramcards.pdf  = typon
+   - ramcard.pdf   = documentation en francais
+   - ramcard.dsk   = programme CPC, mais aucune ROM fournit
+
+
+2) Liste des composants
+-----------------------
+
+   * 6  R1-R4, R7, R9 = 10k
+   * 2  R5, R8        = 1k                       [2]
+   * 1  R6            = 100k
+   * 1  R10           = 47k
+   * 10 D1-D9, D12    = 1N4148                   [2]
+   * 2  D10, D11      = BAT85                    [1]
+   * 1  DZ            = zener 3,3V               [2]
+   * 1  T1            = BC547B
+   * 1  C1            = 1 microF                 [2]
+   * 3  C2, C3, C4    = 100 nF
+   * 1  C5            = 100 microF
+   * 1  IC1           = 74LS374 (dip20)
+   * 1  IC2           = 74LS00 (dip14)
+   * 1  IC3           = 74LS138 (dip16)
+   * 1  IC4           = RAM 128K or 32K (dip32)
+   * 1  IC5           = 74LS85 (dip16)
+   * 1  IC6           = 74LS32 (dip14)
+   * 2  DPSW1, DPSW2  = dipswitch 8
+   * 1  CON1          = HE10 male 50 pt
+   * 1  battery CR2032 + support
+   * 1  HE10 femelle 50 pt + 10 cm cable nappe
+   * 1  centronic/encartable 50 pt
+
+     [1] diode faible tension seuil
+     [2] DZ peut parfois ne pas sauvegarder correctement IC4, voir ci-dessous
+
+   Le prix de revient d'une RAMCARD est d'environ 45 Euros.
+
+
+3) Cablage
+----------
+
+   On soudera dans l'ordre les composants :
+     - resistances
+     - diodes
+     - straps (11 straps)
+     - support de CI
+     - transistor
+     - dipswitch
+     - support de pile
+     - connecteur HE10
+
+   On construira une nappe pour le CPC a l'aide du connecteur (centronics/
+   encartable) et du HE10 femelle 50 pt. Sur la RAMCARD on soudera une HE10
+   male 50 pt.
+   Inserer tous les circuits, vous pouvez utiliser une RAM de 128K ou 32K.
+   Si vous utiliser une RAM de 32K, faites attention, celle-ci possede 4
+   broches en moins, placez-la en bas du support afin de laisser les broches
+   1, 2, 31, 32 non connectes. 
+
+   Vous pouvez apporter diverses modifications, un emplacement est prevu pour
+   un interrupteur de desactivation general de la RAMCARD (coupez la piste),
+   vous pouvez egalement remplacer les dipswitch par des interrupteurs externe
+   ou ajouter un bouton reset.
+   Parfois DZ n'est pas assez rapide pour la sauvegarde de IC4, si vous avez
+   des problemes de sauvegarde vous pouvez effectuer ces modifications :
+      - supprimer C1
+      - supprimer D12
+      - remplacer DZ par une resistance de 33k
+      - remplacer R8 par une resistance de 33k
+
+
+4) Test et problemes
+--------------------
+
+   La RAMCARD doit etre connectee CPC eteint.
+   Pour le premier test, placer tous les switch sur off, l'installation de la
+   pile n'est pas necessaire (la pile n'est utilise que pour la sauvegarde
+   quand le CPC est eteint).
+   Allumer votre CPC, tout doit fonctionner comme d'habitude, si tel n'est pas
+   le cas, eteignez tout et verifiez votre platine et la nappe.
+
+   Lancer ROMTEST.BIN, ce programme affiche les differentes ROM qu'il detecte.
+   Jouer avec les differents interrupteurs de DIPSW2, chacun de ces switch
+   valide une ROM dont le numero doit s'afficher (delai d'affichage de 5s).
+   Si rien ne s'affiche, eteignez le CPC et reverifier la platine et la nappe.
+   Basculer les switch 1 -> 5 de DIPSW1, remarquer comment le numero de ROM
+   est modifie.
+   DIPSW1 change les 5 bits de poids fort de la plage des numeros de ROM.
+   Pour choisir ou vous placer vos 8 numero de ROM contigus vous devez donc
+   decomposer votre numero de ROM en binaire et placer les switch de DIPSW1
+   adequat.
+
+   Enfin, placer le switch de DIPSW1 sur on, les numeros de ROM de la RAMCARD
+   apparaissent en rouge signalant qu'il est possible d'ecrire dans ces rom.
+   Ce switch controle l'ecriture (programmation de rom) pour toutes les ROM
+   de la RAMCARD qui ont ete activees (par DIPSW2).
+
+   Si ces tests ne fonctionnent pas, chercher un court-circuit ou une piste
+   coupee sur la platine.
+   Essayer de deconnecter et reconnecter la nappe au CPC (CPC eteint bien sur)
+   les problemes de fonctionnement sont tres souvent lies aux connexions des
+   connecteurs encartable.
+   Si votre RAMCARD a reussi tous ces tests, felicitations, vous venez d'entrer
+   dans le monde des rom sur CPC !
+
+
+5) Principe de fonctionnement
+-----------------------------
+
+   Le numero de ROM (port DFxx) est stocke dans un 74LS374 et decode par le
+   74LS85 (5 bit de poids fort) et le 74LS138.
+   Quand un acces (lecture ou ecriture) est effectue sur un des numeros de rom
+   de la RAMCARD, une des 8 sorties du 73LS138 passe a l'etat bas.
+   DIPSW2 permet de laisser passer ou de bloquer l'acces.
+   Les portes OU avec le 74LS00 et le 74LS32 controlle la suite de l'acces,
+   s'il s'agit d'une lecture le signal ROMDIS est envoye au CPC, s'il s'agit
+   d'une ecriture l'acces passe par le switch 8 de DIPSW1.
+
+   La RAMCARD ajoute jusqu'a 8 ROM en memoire C000-FFFF dont le numero de base
+   est defini par DIPSW1 :
+     - switch 1 = poids rom 128
+     - switch 2 = poids rom 64
+     - switch 3 = poids rom 32
+     - switch 4 = poids rom 16
+     - switch 5 = poids rom 8
+     - switch 6 = non utilise
+     - switch 7 = non utilise
+     - switch 8 = validation ecriture
+
+   Les ROM sont validees/invalidees individuellement par DIPSW2 :
+     - switch 1 = numero rom+0 on/off
+     - switch 2 = numero rom+1 on/off
+     - switch 3 = numero rom+2 on/off
+     - switch 4 = numero rom+3 on/off
+     - switch 5 = numero rom+4 on/off
+     - switch 6 = numero rom+5 on/off
+     - switch 7 = numero rom+6 on/off
+     - switch 8 = numero rom+7 on/off
+
+   Le programme RAMCARD.BAS permet de programmer une ROM dans la RAMCARD.
+   L'ecriture est autorisee par l'utilisateur a l'aide de l'interrupteur 8 de
+   DIPSW1, n'activer ce switch que lorsque cela est necessaire.
+   Lorsque ce switch est sur on, toute ecriture en RAM a l'adresse C000-FFFF
+   sera egalement transmise a la RAMCARD si le numero de ROM actuel correspond.
+
+
+6) Informations
+---------------
+
+   Pour plus d'information consulter ramcard.pdf, vous y apprendrez comment
+   programmer vos propres ROM et vous y trouverez les sources des differents
+   programmes.
+
+   Pour toutes informations ou suggestions vous pouvez me contacter :
+     - ram7@cpcscene.com
+
+                                                               RAM7

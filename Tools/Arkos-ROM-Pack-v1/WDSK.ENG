@@ -1,0 +1,186 @@
+WRITEDSK/DIRDOS 1.2
+-------------------
+By Targhan/Arkos
+
+
+These two little tools will allow you to  transfer  a  DSK  from  a  720ko  disc
+(formatted on PC or DOSCOPY for example), or directly from a PC, to a CPC  disc.
+It works like DSKCPC from Divine  Coding.  Of  course,  Writedsk  is  much  more
+powerful :) :
+
+New features for V1.2 :
+-----------------------
+- CPCBooster+ support !
+- Managment of same name sectors. '5KB Demo3' format type can be transfered.
+- Managment of 64k memory. Forget this if you only have one drive or don't  have
+the CPCBooster !
+- Source and  destination  can  be  ommitted  if  you  use  the  face  selection
+parameter.
+- Shorter RSX : you now type WDSK and not WRITEDSK. Shorter :).
+
+
+
+
+Other features :
+----------------
+- It recognizes all standard CPC format, from size 0 to 5. Size 6 sectors aren't
+recognized.
+- Standard and Extended DSKs are recognized.
+- Double sided DSKs too.
+- You can use ONE drive only for the transfert ! Very useful for those, like me,
+who have only one 3'5 drive and don't want to use 3'.
+
+
+
+
+
+HOW TO USE IT
+-------------
+|WDSK,"dskname","[SourceDestination][Head]"
+
+Transfert the DSK named "dskname" from Source drive to Destination drive. If the
+second parameter is omitted, the Source is B and the destination A. The DSK name
+is short (8+3 letters), DOS-like. You may  have  to  use  tilde  (control+2)  if
+you've saved your DSK on PC with a long name.
+
+NEW : the CPCBooster is named as drive 'C'. It can only be used as a Source.  If
+you want to create a DSK to the PC, use ReadDSK.
+
+Know that your DSK must always be on the root of your disc.
+
+New option since V1.1, the "head" allows to write directly on the second side of
+your disc. It is optional though. Having to switch side between two  passes  now
+belongs to the past ! The only possibility is "1" though, with indicates side 1.
+I did this for you not to incidentally erase the side 0,  thinking  it  was  the
+second one (In the FDC language, sides are noted 0 and 1, not 1 and 2).
+
+Note that the 'head' option is ignored if the  DSK  is  double  sided,  with  is
+logical. What's more, this option doesn't change  the  'side'  included  to  the
+sector IDs.
+
+I should also say that you can ONLY read the PC disc (FAT 12)  if  the  selected
+head of your source drive is 0 (else head 0 is no more accessible, as head 1  is
+forced. FAT 12 is double sided !).
+
+For more information  about  using  the  CPCBooster  and  running  the  PC  tool
+transfer, please read the main notice also included to this kit.
+
+
+Examples :
+|WDSK,"dia.dsk","AA1"
+|WDSK,"midline.dsk","CA"
+|WDSK,"bigofull.dsk"
+|WDSK,"xmas.dsk","1"
+|WDSK,"5kbdemo3.dsk","AB"
+
+
+-----------------
+|DIRDOS,["Source"]
+
+DIRDOS performs a CAT on the DOS disc, to see the files on the root. Directories
+are also noted, but can't be explored. The Source drive declaration is optional.
+By default, the B drive is used.
+
+Once again, don't forget to select the side 0 of your drive.
+
+Example :
+|DIRDOS,"a"
+|DIRDOS
+
+
+
+THE INTERFACE
+-------------
+Nothing crazy. You don't have to understand anything on the screen to  transfert
+your DSKs. Let me describe what the columns mean. They all refer to the  sectors
+of the current track to be written.
+
+TR = Number of TRack written in the sector ID.
+SD = Shows the SiDe in the sector ID.
+ID = Very important, IDentification number of the sector.
+SZ = Very important too, the sector SiZe. It is the actual size of the sector.
+
+Note that, except the SiZe, all this information can be junk, it's only used  to
+identify a sector. Some protections will have fun at using strange values.
+
+In the INFOS columns can come two acronyms :
+ERA = Means ERAsed. It's just a mark set to the  sector,  it  doesn't  mean  the
+sector is actually erased. To read it you must use the 'read erased  sector  FDC
+instruction.
+CKS = Means Bad CheckSum. To sum up, the FDC will report an error after  reading
+the sector, believing an error has been made while reading. I'll talk  about  it
+later, but in a practical case it's completely useless, in fact I  simply  don't
+do anything with this flag.
+
+The 'Size' at the left of the screen represents the sector  size  given  to  the
+Format instruction. So all sectors of the track can be this size, or less.
+
+Last remark, note the increasing value at the bottom right when reading  the  PC
+disc : it represents the buffer filling. Just to know how long you still have to
+wait...
+
+That's all about the interface.
+
+
+
+
+ACKNOWLEDGMENT
+--------------
+Although the DSK format is well featured, a lot of  emulators  don't  update  it
+well, like Winape. If you format a track with size 3 sectors, the  track  header
+will read size 2 ! The good size has to be found in the  sector  headers...  The
+GAP#3 suffers the same way. Approximated FDC emulation allows demos and software
+to run well, but corrections need to be made  if  you  transfert  them  on  CPC.
+Existing tools like CPDWRITE and CPCTRANS perform  these  corrections.  WRITEDSK
+too. About the GAP, I used the correction table you will find in the  DISC+ULTRA
+notice. However, I made a lot of changes. Thus, the minimum value is set to #20,
+the maximum to #4E. Every well built track will work. If the GAP must  be  lower
+than #20, then the track contains too much sectors for its own  good,  and  it's
+not my business ! Bigger than #80 GAP is useless too. If  your  drive  needs  it
+then it MUST be changed quick !
+
+
+The V1.1, then V1.2 contains a lot of improvments, as  I  learnt  a  lot  lately
+(Thanks Ram7 !) Thus, contrary to  what  I  thought,  it  is  possible  to  have
+different sized sectors. The routines I used here  are  basic,  but  allow  many
+protections to be transfered.
+
+About the 'bad checksum' flag, the only  way  I  see  to  create  it  is  really
+hardcore. In fact I believe  it  is  set  by  transfer  tools  that  don't  like
+different sized sectors. Anyway, for now I never found a DSK  that  tested  such
+flag, so... Lately, I found out that size 0 sectors can't be read once you wrote
+on them ! No one seems to have noticed that. This would explain this flag in the
+Leader Board protection for example, which has  one  size  0  sector.  But  this
+doesn't matter for WriteDSK, as writting size 0 sector is 'allowed' by the FDC.
+
+The V1.2 resolves also the problem of these tracks that have sectors having  all
+the same name, like the 5KB Demo 3 or The Demo. Don't worry if the  transfer  is
+very slow, it's normal, writting such tracks requires multiple passes.
+
+About this topic, it is possible  that  I  update  WriteDSK  to  manage  special
+formats like the ones I'm working on...
+
+Just wait and see !
+
+
+If you have a DSK that doesn't work with WriteDSK, don't hesitate to send it  to
+me, just make sure it works fine on emulators !
+
+
+
+----------------
+Contact me here :
+
+targhan@cpcscene.com
+targhan@netcourrier.com
+
+www.arkos.cpcscene.com
+www.julien-nevo.com/arkos
+
+www.starkos.cpcscene.com
+www.julien-nevo.com/starkos
+
+www.dirtyminds.cpcscene.com to learn about and order your CPCBooster.
+
+See you soon,
+Targhan/Arkos.

@@ -1,0 +1,219 @@
+WRITEDSK/DIRDOS 1.2
+-------------------
+Par Targhan/Arkos
+
+
+Ces deux petits utilitaires vous permettent de tranferer un  DSK  copie  sur  un
+disc au format 720ko (formatte sur PC ou DOSCOPY par  exemple),  ou  directement
+d'un PC, vers un disc CPC si vous possedez la  CPCBooster.  Il  s'agit  du  meme
+principe que DSKCPC de Divine Coding. Biensur, Writedsk est bien  plus  puissant
+:)
+
+
+Nouveautes de la V1.2 :
+-----------------------
+- Support de la CPCBooster d'Antitec !
+- Gestion des secteurs de noms identiques. Permet aux formats de type '5KB Demo'
+de passer.
+- Gestion de 64k de memoire. A oublier si vous ne disposez que d'un lecteur,  ou
+que vous ne passez pas par la CPCBooster !
+- Le parametre de selection de face peut s'utiliser sans preciser  les  lecteurs
+source/destination.
+- Raccourci du RSX : on utilise desormais  WDSK  et  non  WRITEDSK,  c'est  plus
+court!
+
+
+
+Autres caracteristiques :
+-------------------------
+- Prends en compte les formats 'standards' CPC. Les secteurs de  taille  0  a  5
+sont parfaitement reconnus. Les formats de taille 6 seront rejetes.
+- Les DSK Standard et Extended sont pris en compte.
+- Idem pour les DSK double-face.
+- Vous avez la possibilite d'utiliser le MEME lecteur pour le transfert  !  Tres
+utile pour ceux qui ne possedent qu'un seul 3'5 par  exemple,  et  qui  refusent
+l'utilisation de 3' (comme moi :).
+
+
+
+
+
+
+
+
+
+UTILISATION
+-----------
+|WDSK,"nomdudsk","[SourceDestination][Tete]"
+
+Transfert le DSK "nomdudsk" du lecteur Source vers le lecteur Destination. Si le
+deuxieme parametre est omis, la source est par defaut B, la  destination  A.  Le
+nom du DSK est au format court (8+3 lettres) comme sous DOS. Il vous  sera  peut
+etre necessaire d'utiliser le tilde (control+2) si vous avez sauve votre DSK sur
+PC avec un long nom.
+
+NOUVEAU, la CPCBooster est designee par la lettre C ! Elle ne peut etre utilisee
+qu'en Source ici. Si vous voulez creer un DSK vers le PC, utilisez ReadDSK.
+
+Notons que si vous passez par un disc MS DOS,  votre  DSK  doit  obligatoirement
+etre a la racine de votre disquette.
+
+Nouvelle option depuis la V1.1, la "tete" permet d'ecrire directement sur la  2e
+face de votre disquette. Elle est cependant facultative. Fini  le  temps  ou  on
+devait changer de face entre chaque passe ! La seule possibilite est d'y  mettre
+un 1, ce qui indique face 1. J'ai procede ainsi pour ne pas  qu'accidentellement
+vous effaciez  la  face  0  en  pensant  qu'il  s'agissait  de  la  2  (Dans  la
+terminologie FDC, les faces sont appellees 0 et 1, et non 1 et 2).
+
+Je precise egalement que la lecture du disc PC (FAT 12) ne peut marcher  que  si
+vous etes sur la tete 0 !
+
+A noter que l'option 'Tete' est ignoree si le DSK est double face,  ce  qui  est
+logique. De plus, cette option ne change en rien le parametre 'Side' inclus dans
+les IDs secteurs.
+
+Pour de plus amples informations  sur  l'utilisation  de  la  CPCBooster  et  le
+lancement de la partie 'PC', lisez la documentation generale  egalement  fournie
+sur ce disc.
+
+Exemples d'utilisation :
+|WDSK,"dia.dsk","AA1"
+|WDSK,"midline.dsk","CA"
+|WDSK,"bigofull.dsk"
+|WDSK,"xmas.dsk","1"
+|WDSK,"5kbdemo3.dsk","AB"
+
+
+-----------------
+|DIRDOS,["Source"]
+
+DIRDOS vous permet de faire un CAT sur le disc DOS, et ainsi voir  les  fichiers
+situes a la racine. Les repertoires sont  egalement  notes.  Conformement  a  la
+logique de WRITEDSK, il est impossible de visualiser autre chose que la racine.
+
+Le lecteur Source est optionnel. Par defaut, c'est le lecteur B qui est utilise.
+
+Encore une fois, n'oubliez pas de  laisser  la  face  0  selectionnee  de  votre
+lecteur.
+
+Exemples d'utilisation :
+|DIRDOS,"a"
+|DIRDOS
+
+
+
+
+L'INTERFACE
+-----------
+
+Rien de bien mechant a l'horizon, il y a juste plus de details  techniques  pour
+epater la populace. Vous n'etes biensur pas obliger de comprendre  quoi  que  ce
+soit pour tranferer votre DSK correctement. Mais pour ceux que ca interesse,  je
+vais decrire brievement les colonnes du milieu. Elles correspondent aux IDs  des
+secteurs a ecrire pour la piste en cours. Toutes les infos de ces colonnes  sont
+notees en hexadecimal.
+
+TR = Montre le numero de la TRack (piste) ecrites dans l'ID du secteur.
+SD = Montre la SiDe (face) de l'ID du secteur.
+ID = Tres important, le numero d'IDentification du secteur.
+SZ = Tres important aussi, la taille du  secteur.  Notons  qu'il  s'agit  de  la
+taille effective du secteur.
+Notons qu'a part  la  Size,  ces  informations  peuvent  ressembler  a  tout  et
+n'importe quoi. Elles ne servent en verite qu'a identifier le secteur.  Si  vous
+voulez vous y retrouver dans un format que vous avez cree, il est preferable  de
+faire ca proprement. Encore une fois, ecrire n'importe quoi est surtout le hobby
+des protections.
+
+Dans la colonne INFOS peuvent surgir deux petits acronymes obscurs :
+ERA = Signifie que le secteur est  'ERAsed',  soit  'efface'.  En  verite,  cela
+signifie juste que le secteur est marque d'une certaine maniere, et que pour  le
+lire, il faut utiliser une 'lecture de secteur  efface'.  Certaines  protections
+s'amusent comme elles peuvent.
+CKS = Signifie 'Bad Checksum'. En gros, que  le  FDC  va  rapporter  une  erreur
+lorsqu'il va le lire car il a l'impression que  les  donnes  sont  erronnes.  Je
+reparle de ce cas plus loin, mais la pratique m'a  montre  qu'on  en  a  rien  a
+faire, de ce flag. D'ailleurs, je ne tente meme pas de le recreer.
+
+Notons que le 'Size' sur le cote gauche de l'interface represente la  taille  de
+secteur donnee a l'instruction de formattage. Mais il est tout a  fait  possible
+que les secteurs ecrits soient plus petits.
+
+Derniere remarque, pendant que la lecture  du  disc  PC  s'effectue,  le  niveau
+d'occupation du buffer est inscrit en bas a droite. Ca permet  de  patienter  un
+peu, et de savoir quand la passe va se finir.
+
+
+Voila, c'est tout pour l'interface.
+
+
+
+A SAVOIR
+--------
+Bien que le format DSK soit complet, de nombreux emulateurs le gerent mal,  dont
+Winape. Ainsi, si vous formattez une piste en taille 3, le header  de  celle  ci
+indiquera taille 2 ! La taille exacte devra etre  trouvee  dans  le  header  des
+secteurs... Il en est de meme pour le GAP#3 qui garde  souvent  la  valeur  #4E.
+L'emulation  partielle  du  FDC  permet  aux  demos  et  logiciels  de   tourner
+correctement. Les outils de transfert existants (cpdwrite, cpctrans) connaissent
+ces  faiblesses  et  corrigent  d'eux  meme  ces  valeurs  erronnees.   WRITEDSK
+egalement. En ce qui concerne le GAP, j'effectue des corrections en fonction  du
+nombre de secteurs et leur taille. Si vous etes curieux, vous  pouvez  retrouver
+cette table de correction dans la notice de DISC+ULTRA. J'y  ais  tout  de  meme
+apporte des modifications. Ainsi, la valeur minimale du GAP est fixee a #20,  la
+maximum a #4E. Toute piste normalement constituee devrait fonctionner. Si le GAP
+est inferieur, alors la piste contient trop de secteurs pour sa propre  securite
+et je ne reponds plus de rien ! De meme un GAP de #80 est completement  inutile.
+Si votre lecteur en a besoin, c'est qu'il est grand temps d'en changer !
+
+La V1.1, puis 1.2 contiennent de nombreuses  ameliorations,  car  j'ai  beaucoup
+appris entre temps (un grand merci a Ram7 qui m'a  permis  de  mieux  cerner  la
+logique du FDC !) Ainsi, contrairement a ce que je pensais, il est tout  a  fait
+possible de creer une piste  avec  des  secteurs  de  tailles  differentes.  Les
+routines ici presentes permettront a de nombreuses protections de passer.
+
+Ainsi, lorsque je rencontre des secteurs de tailles differentes, je  choisis  le
+plus grand, a condition qu'il ne soit pas marque 'bad checksum'.
+
+A ce sujet, j'avoue que je ne sais pas trop quoi penser de  ce  flag.  La  seule
+maniere que je vois de le recreer sur CPC serait vraiment crade. En fait  je  me
+demande si ce ne sont pas les logiciels de transfert CPC -> DSK qui  le  placent
+eux meme. Dernierement, je me suis rendu compte que les secteurs de taille 0  ne
+peuvent etre lu une fois qu'on y a ecrit. Personne ne semble l'avoir remarque  !
+Voila qui expliquerait la presence de ce flag dans la protection de Leader Board
+par exemple, dont l'un des secteurs est de taille 0. Mais cela ne  concerne  pas
+WriteDSK, mais ReadDSK, puisque l'ecriture des tailles 0  est  'admise'  par  le
+FDC.
+
+
+La V1.2 resoud egalement le probleme des secteurs ayants  des  noms  identiques,
+comme c'est le cas pour la 5KB Demo 3 ou The Demo. Ne vous inquietez pas  si  le
+transfert ralenti considerablement dans ce cas, c'est normal, il faut autant  de
+tour de disque qu'il y a de secteurs sur la piste !
+
+A ce sujet, il est tout a fait possible que des  versions  de  WriteDSK  sortent
+pour prendre en  compte  des  formats  speciaux,  comme  ceux  sur  lesquels  je
+travaille.
+
+Mais nous verrons ca plus tard...
+
+
+Si vous avez un DSK qui ne fonctionne pas, n'hesitez pas a  me  l'envoyer,  sous
+reserve qu'il est en bon etat !
+
+
+----------------
+Contactez moi ici :
+
+targhan@cpcscene.com
+targhan@netcourrier.com
+
+www.arkos.cpcscene.com
+www.julien-nevo.com/arkos
+
+www.starkos.cpcscene.com
+www.julien-nevo.com/starkos
+
+www.dirtyminds.cpcscene.com pour en savoir plus sur la CPCBooster.
+
+A+,
+Targhan/Arkos.

@@ -1,0 +1,142 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 PAUTA_0                                                        0010 R
+  0 PAUTA_1                                                        0019 R
+  0 PAUTA_10                                                       00EC R
+  0 PAUTA_11                                                       00BB R
+  0 PAUTA_12                                                       00D8 R
+  0 PAUTA_13                                                       00E3 R
+  0 PAUTA_2                                                        002E R
+  0 PAUTA_20                                                       012C R
+  0 PAUTA_22                                                       0155 R
+  0 PAUTA_23                                                       0172 R
+  0 PAUTA_3                                                        003D R
+  0 PAUTA_30                                                       0199 R
+  0 PAUTA_31                                                       01A2 R
+  0 PAUTA_32                                                       01B5 R
+  0 PAUTA_33                                                       01CA R
+  0 PAUTA_34                                                       01DB R
+  0 PAUTA_35                                                       01E8 R
+  0 PAUTA_36                                                       01F5 R
+  0 PAUTA_4                                                        004E R
+  0 PAUTA_40                                                       0254 R
+  0 PAUTA_41                                                       0261 R
+  0 PAUTA_42                                                       027C R
+  0 PAUTA_43                                                       0289 R
+  0 PAUTA_44                                                       029A R
+  0 PAUTA_45                                                       02BD R
+  0 PAUTA_46                                                       02CA R
+  0 PAUTA_47                                                       02D9 R
+  0 PAUTA_5                                                        006D R
+  0 PAUTA_6                                                        007A R
+  0 SONIDO0                                                        0095 R
+  0 SONIDO1                                                        009C R
+  0 SONIDO10                                                       010D R
+  0 SONIDO11                                                       0114 R
+  0 SONIDO12                                                       011E R
+  0 SONIDO2                                                        00A3 R
+  0 SONIDO3                                                        00A7 R
+  0 SONIDO30                                                       0220 R
+  0 SONIDO31                                                       0227 R
+  0 SONIDO32                                                       0231 R
+  0 SONIDO33                                                       0238 R
+  0 SONIDO40                                                       0300 R
+  0 SONIDO41                                                       030A R
+  0 SONIDO42                                                       031D R
+  0 SONIDO43                                                       0321 R
+  0 _EFECTO0                                                       0333 R
+  0 _EFECTO1                                                       0344 R
+  0 _EFECTO2                                                       0361 R
+  0 _EFECTO3                                                       0398 R
+  0 _EFFECT_TABLE                                                  032B R
+  0 _RULE_TABLE_0                                                  0002 R
+  0 _RULE_TABLE_1                                                  00B3 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 _RULE_TABLE_2                                                  0124 R
+  0 _RULE_TABLE_3                                                  018B R
+  0 _RULE_TABLE_4                                                  0244 R
+  0 _SONG_0                                                        0407 GR
+  0 _SONG_1                                                        0894 GR
+  0 _SONG_2                                                        11D1 GR
+  0 _SONG_3                                                        1894 GR
+  0 _SONG_4                                                        23F2 GR
+  0 _SONG_TABLE_0                                                  0000 R
+  0 _SONG_TABLE_1                                                  00B1 R
+  0 _SONG_TABLE_2                                                  0122 R
+  0 _SONG_TABLE_3                                                  0189 R
+  0 _SONG_TABLE_4                                                  0242 R
+  0 _SOUND_TABLE_0                                                 008F R
+  0 _SOUND_TABLE_1                                                 0107 R
+  0 _SOUND_TABLE_2                                                 0187 R
+  0 _SOUND_TABLE_3                                                 0218 R
+  0 _SOUND_TABLE_4                                                 02F8 R
+  0 ___str_0                                                       2CDB R
+  0 ___str_1                                                       2CFE R
+  0 ___str_2                                                       2D18 R
+  0 ___str_3                                                       2D36 R
+  0 ___str_4                                                       2D4F R
+  0 ___str_5                                                       2D5B R
+  0 _asm_data_quezesto                                             0000 GR
+    _cpc_AssignKey                                                 **** GX
+    _cpc_DisableFirmware                                           **** GX
+    _cpc_EnableFirmware                                            **** GX
+    _cpc_GetScrAddress                                             **** GX
+    _cpc_PrintGphStrXYM1                                           **** GX
+    _cpc_PrintGphStrXYM12X                                         **** GX
+    _cpc_PrintStr                                                  **** GX
+    _cpc_PutSpXOR                                                  **** GX
+    _cpc_ScanKeyboard                                              **** GX
+    _cpc_SetColour                                                 **** GX
+    _cpc_SetInkGphStrM1                                            **** GX
+    _cpc_SetModo                                                   **** GX
+    _cpc_TestKeyF                                                  **** GX
+    _cpc_WyzInitPlayer                                             **** GX
+    _cpc_WyzLoadSong                                               **** GX
+    _cpc_WyzSetPlayerOff                                           **** GX
+    _cpc_WyzSetPlayerOn                                            **** GX
+    _cpc_WyzStartEffect                                            **** GX
+    _cpc_WyzTestPlayer                                             **** GX
+  0 _datos                                                         03B0 GR
+  0 _main                                                          27D0 GR
+  0 _pause                                                         27CA GR
+  0 _pelota                                                        27A9 GR
+  0 _texto04                                                       03B0 R
+  0 _texto05                                                       03BA R
+  0 _texto06                                                       03C8 R
+  0 _texto07                                                       03CF R
+  0 _texto08                                                       03D8 R
+  0 _texto09                                                       03E7 R
+  0 _texto10                                                       03F7 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 kolo                                                           27CC R
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size 2D68   flags    0
+   1 _DATA                                      size    0   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

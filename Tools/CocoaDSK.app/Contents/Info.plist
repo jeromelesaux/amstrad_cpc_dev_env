@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>dsk</string>
+				<string>DSK</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>CocoaDsk.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>NSFilenamesPboardType</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>CpDk</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSDocumentClass</key>
+			<string>MyDocument</string>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>CocoaDSK</string>
+	<key>CFBundleIconFile</key>
+	<string>iDSKb</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yourcompany.CocoaDSK</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>CocoaDSK</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.08</string>
+	<key>CFBundleSignature</key>
+	<string>Sid</string>
+	<key>CFBundleVersion</key>
+	<string>1.08</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>

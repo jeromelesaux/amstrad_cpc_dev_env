@@ -1,0 +1,29 @@
+GIMP Template
+
+(GimpTemplate "160x200 Amstrad CPC Mode 0"
+    (width 160)
+    (height 200)
+    (unit pixels)
+    (xresolution 36.000000)
+    (yresolution 72.000000)
+    (resolution-unit inches)
+    (image-type rgb)
+    (fill-type background-fill))
+(GimpTemplate "320x200 Amstrad CPC Mode 1"
+    (width 320)
+    (height 200)
+    (unit pixels)
+    (xresolution 72.000000)
+    (yresolution 72.000000)
+    (resolution-unit inches)
+    (image-type rgb)
+    (fill-type background-fill))
+(GimpTemplate "640x200 Amstrad CPC Mode 2"
+    (width 640)
+    (height 200)
+    (unit pixels)
+    (xresolution 144.000000)
+    (yresolution 72.000000)
+    (resolution-unit inches)
+    (image-type rgb)
+    (fill-type background-fill))

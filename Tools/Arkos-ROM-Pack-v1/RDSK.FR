@@ -1,0 +1,123 @@
+READDSK V1.0
+------------
+Par Targhan/Arkos
+
+
+Cet utilitaire permet la creation sur PC d'un DSK lu sur un CPC  (comme  CpdRead
+ou CPCTrans peuvent le  faire).  Contrairement  a  WriteDSK,  ReadDSK  necessite
+obligatoirement la CPCBooster+.
+
+
+Caracteristiques :
+------------------
+- Prends en compte les formats 'standards' CPC. Les secteurs de  taille  1  a  6
+sont parfaitement reconnus. Conformement a la description  du  format  DSK,  les
+formats de taille 6 ne contiennent que #1800 octets.
+- Les secteurs defectueux (ou taille 0) sont ignorables, auxquels cas un secteur
+vide sera ecrit, et les flags FDC correspondant ajoutes au DSK.
+- Les secteurs effaces sont reconnus.
+- Les formats de type The Demo ou 5KB Demo 3 (secteurs ayant le meme  nom)  sont
+reconnus.
+- Le format du DSK est Extended.
+- Des DSK double-face peuvent etre generes  (transferts  de  disc  Parados  donc
+possibles).
+
+
+UTILISATION
+-----------
+|RDSK,"nomdudsk","[Source][1/2]"
+
+Transfert le DSK "nomdudsk" du lecteur Source vers le PC par la  CPCBooster.  Si
+la Source est omise, alors le lecteur A est pris par defaut.
+
+Le parametre facultatif [1/2] permet de selectionner la face a  transferer.  '1'
+signifie la 2e face de votre disquette, et '2' va creer un DSK double face.  Ces
+deux options necessitent un lecteur double face bien entendu.  De  plus,  placez
+vous sur la face 0 sinon elle ne sera plus accessible  pour  la  lecture  double
+face.
+
+Lorsque le PC signalera que le DSK a bien ete ouvert dans le repertoire courant,
+la lecture commence. Attention a ne pas ecraser un DSK important sur le PC !
+
+Tout comme WriteDSK, la liste des secteurs de la piste est affichee sur l'ecran.
+Pour une description des differents parametres  ecrits,  veuillez  consulter  la
+notice de WriteDSK. Dans le cas des formats a la The Demo ou 5KBDemo 3 (secteurs
+ayant le meme nom), la lecture sera considerablement ralentie, car de  multiples
+passes sont necessaires pour lire les secteurs dans le bon ordre. Ne perdez  pas
+patience :).
+
+Pour de plus amples informations  sur  l'utilisation  de  la  CPCBooster  et  le
+lancement de la partie 'PC', lisez la documentation generale  egalement  fournie
+sur ce disc.
+
+Exemples d'utilisation :
+|RDSK,"dia.dsk"
+|RDSK,"midline.dsk","2"
+|RDSK,"bigofull.dsk","B1"
+
+
+
+
+A SAVOIR
+--------
+Quelques details techniques. Lors de la  creation  du  DSK,  le  GAP  n'est  pas
+'teste' sur la disquette (il n'existe pas de technique 'propre' et  fiable  pour
+le faire, a ma connaissance, et ce serait assez inutile dans notre cas). Il  est
+donc cree en fonction du nombre de secteurs par piste, et leur taille,  avec  la
+meme table que celle utilisee par WriteDSK. Le resultat sera  donc  plus  fiable
+que la plupart des GAP ecrits par defaut dans les DSKs que l'on  trouve  sur  le
+net (de toute facon, WriteDSK effectue aussi des corrections a l'ecriture, alors
+le risque est minime).
+
+Le Filler Byte est par contre fixe a #E5, car la  encore,  il  n'existe  pas  de
+technique qui vaille la peine d'etre utilisee, d'autant plus que ca ne servirait
+a rien.
+
+Tout comme WriteDSK, la taille des secteurs donnee  dans  le  Header  Piste  est
+celle du plus grand secteur de la piste, si son contenu est valide.
+
+Certains seront peut etre interloques  par  ce  que  j'ai  ecrit  a  propos  des
+secteurs de taille 0. Et bien a ma grande surprise, ces  secteurs  semblent  mal
+geres par le FDC. Au formattage, pas de probleme. A l'ecriture, pas de probleme.
+A la lecture, aie. Si on lit un secteur de taille 0 apres formattage, on  recoit
+&50 octets de Filler, au lieu des &80 que l'on esperait  !  Une  fois  que  l'on
+ecrit sur ce secteur (l'ecriture ne renvoie aucune erreur), impossible de relire
+le moindre octet, le secteur est declare 'Bad Checksum'. La protection de Leader
+Board confirme mes theories, un secteur de taille 0 est declare en Bad Checksum,
+et ne contient que &50 octets du Filler ! Le FDC du PC qui l'a transfere  semble
+avoir la meme maladie... Ou  bien  le  probleme  viendrait  du  FDC  du  CPC  en
+ecriture?
+
+Lorsqu'un secteur est lu mais renvoie une erreur, je  donne  la  possibilite  de
+relire  ou  d'ignorer.  Cela  permet  de  donner  une  2e  chance  aux  secteurs
+defectueux, tout en n'annulant  pas  la  creation  du  DSK  si  le  secteur  est
+definitivement detruit ou de taille 0. Les flags FDC du secteur seront  modifies
+en consequence lors de la generation du DSK.
+
+Enfin, il est possible que certains DSKs encore proteges ne passent pas. Le seul
+qui m'ait pose probleme est Discology 6, soit disant 'cracke' par Xor, mais  qui
+a pourtant laisse une protection active. Je pourrais creer un mode special  pour
+passer ce genre de protection, mais finalement je me dis que ce n'est pas utile.
+Peut etre dans une version future !
+
+
+----------------
+Voila, c'est fini !
+
+
+Pour toute information et renseignement, contactez moi ici :
+
+
+targhan@cpcscene.com
+targhan@netcourrier.com
+
+www.arkos.cpcscene.com
+www.julien-nevo.com/arkos
+
+www.starkos.cpcscene.com
+www.julien-nevo.com/starkos
+
+www.dirtyminds.cpcscene.com pour en savoir plus sur la CPCBooster.
+
+A+,
+Targhan/Arkos.

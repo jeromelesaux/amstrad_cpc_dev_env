@@ -1,0 +1,12 @@
+-mjwx
+-i code.ihx
+-b _CODE = 0x6038
+-b _DATA = 0x0000
+-k D:\SDCC\bin\..\lib\z80
+-l cpcrslib.lib
+-l cpcwyzlib.lib
+-l z80
+code.rel
+crt0_cpc.rel
+
+-e

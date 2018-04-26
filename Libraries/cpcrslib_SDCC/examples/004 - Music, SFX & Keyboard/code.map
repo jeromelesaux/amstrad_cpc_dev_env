@@ -1,0 +1,210 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           sprites
+     00000000  l__BSS                          
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__DATA                         
+     00000000  l__GSINIT                       
+     00000000  l__HEADER                       
+     00000000  l__HEAP                         
+     00000000  l__HOME                         
+     00000000  l__INITIALIZED                  
+     00000000  l__INITIALIZER                  
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000000  s__HEADER                       
+     00000000  s__HEADER0                      
+     00000000  s__HEADER1                      
+     00000001  l__GSFINAL                      
+     00000003  l__HEADER0                      
+     00000009  l__HEADER1                      
+     00003B25  l__CODE                         
+     00006038  s__CODE                         
+     00009B5D  s__DATA                         
+     00009B5D  s__GSFINAL                      
+     00009B5D  s__GSINIT                       
+     00009B5D  s__HOME                         
+     00009B5D  s__INITIALIZED                  
+     00009B5E  s__BSS                          
+     00009B5E  s__HEAP                         
+     00009B5E  s__INITIALIZER                  
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00006038    00003B25 =       15141. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00006038  _asm_data_quezesto                 code
+     000063E8  _datos                             code
+     0000643F  _SONG_0                            code
+     000068CC  _SONG_1                            code
+     00007209  _SONG_2                            code
+     000078CC  _SONG_3                            code
+     0000842A  _SONG_4                            code
+     000087E1  _pelota                            code
+     00008802  _pause                             code
+     00008808  _main                              code
+     00008DA0  __clock                            crt0
+     00008DA1  _exit                              crt0
+     00008DA2  _cpc_AssignKey                     keyboard
+     00008DBF  _cpc_GetScrAddress                 video
+     00008DC3  _cpc_GetScrAddress0                video
+     00008E2D  _cpc_TestKeyF                      keyboard
+     00008E50  _cpc_TestKeyboard                  keyboard
+     00008E74  linea                              keyboard
+     00008E75  bte                                keyboard
+     00008E76  keymap                             keyboard
+     00008E80  tecla_0                            keyboard
+     00008E82  tabla_teclas                       keyboard
+     00008EA3  _cpc_PrintGphStrXYM1               gphstr
+     00008EBA  _cpc_PrintGphStr0                  gphstr
+     00008F7A  terminar_impresion                 gphstr
+     00008F7F  entrar_cola_impresion              gphstr
+     00008F80  add_elemento                       gphstr
+     00008FA3  leer_elemento                      gphstr
+     00008FC6  elementos_cola                     gphstr
+     00008FC8  pos_cola                           gphstr
+     00008FD6  imprimiendo                        gphstr
+     00008FD7  _cpc_WyzConfigurePlayer            
+     00008FE0  _cpc_WyzInitPlayer                 
+     0000900B  _cpc_WyzLoadSong                   
+     00009013  _cpc_WyzSetTempo                   
+     0000901C  _cpc_WyzStartEffect                
+     00009026  _cpc_WyzTestPlayer                 
+     0000902E  _cpc_WyzPlayer                     
+     0000902E  _cpc_WyzSetPlayerOn                
+     00009057  _cpc_WyzSetPlayerOff               
+     00009057  _cpc_WyzSetPlayerOff1              
+     0000977B  _cpc_PrintGphStrXYM12X             gphstr
+     00009793  _cpc_SetColour                     video
+     000097A3  _cpc_SetInkGphStrM1                gphstr
+     000097AF  letra_decodificada                 gphstr
+     000097BF  letra_decodificada_tmp             gphstr
+     000097DF  colores_b0                         gphstr
+     000097E3  _cpc_Chars                         gphstr
+     0000994B  _cpc_DisableFirmware               utils
+     0000995A  _backup_fw                         utils
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00006038    00003B25 =       15141. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0000995C  _cpc_PutSpXOR                      sprites
+     00009973  _cpc_ScanKeyboard                  keyboard
+     000099A6  _cpc_PutMaskSp0                    sprites
+     000099AA  loop_alto_2m_PutMaskSp0            sprites
+     000099BC  salto_lineam_PutMaskSp0            sprites
+     000099CB  _cpc_SetModo                       video
+     000099CF  _cpc_PutSpXOR0                     sprites
+     000099D3  anchox0                            sprites
+     000099E1  suma_siguiente_lineax0             sprites
+     000099F0  _cpc_PrintGphStr0M1                gphstr
+     00009AB5  colores_m1                         gphstr
+     00009ABF  _cpc_GetSp0                        sprites
+     00009AC3  loop_alto_2x_GetSp0                sprites
+     00009AD0  salto_lineax_GetSp0                sprites
+     00009ADF  _int_cpc_PutTile2x80               sprites
+     00009AFD  _cpc_EnableFirmware                utils
+     00009B06  _cpc_PrintStr                      utils
+     00009B1A  _cpc_PutSpTr0                      sprites
+     00009B1C  anchot                             sprites
+     00009B3F  suma_siguiente_lineat              sprites
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSINIT                             00009B5D    00000000 =           0. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00009B5D  gsinit                             crt0
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_GSFINAL                            00009B5D    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER0                            00000000    00000003 =           3. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEADER1                            00000000    00000009 =           9. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+
+Files Linked                              [ module(s) ]
+
+code.rel                                  [ code ]
+crt0_cpc.rel                              [ crt0 ]
+
+
+Libraries Linked                          [ object file ]
+
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_AssignKey.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_GetScrAddress.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_TestKeyF.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_TestKeyboard.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_keyboardVar.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintGphStrXYM1.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintGphStr0.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ColaImpresion.rel ]
+D:\SDCC\bin\..\lib\z80/cpcwyzlib.lib      [ Wyz.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintGphStrXYM12X.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetColour.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetInkGphStrM1.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_Chars.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_DisableFirmware.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PutSpXOR.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_ScanKeyboard.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PutMaskSp0.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_SetModo.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PutSpXOR0.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintGphStr0M1.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_GetSp0.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PutTile2x80.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_EnableFirmware.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PrintStr.rel ]
+D:\SDCC\bin\..\lib\z80/cpcrslib.lib       [ cpc_PutSpTr0.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+
+User Base Address Definitions
+
+_CODE = 0x6038
+_DATA = 0x0000
+
+

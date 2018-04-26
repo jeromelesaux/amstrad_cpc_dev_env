@@ -1,0 +1,380 @@
+ARKOS ROM PACK V1.1
+-------------------
+Includes :
+Arkos Rom V1.0
+Snarkos V1.4
+
+
+Credits :
+SNArkos by Grim/Arkos.
+Other RSXs and AFT by Targhan/Arkos.
+CRTC Test by Offset/Futur's.
+CPCBooster developed by Antitec/Dirty Minds.
+
+
+Welcome in this notice about the Arkos Rom. This Rom  contains  RSXs  that  will
+enhance the use of your CPC, whether you are a coder or a player !  However,  it
+releases all its power of you posess the CPCBooster+ extension by  Antitec/Dirty
+Minds. It will allow you to transfer any file or DSK from you PC  to  your  CPC,
+and the opposite, thanks to the RSXs of this Rom, a little code  on  PC,  and  a
+NULL MODEM cable connected to the COM (serial) port of your PC.  Don't  hesitate
+to visit the Dirty Minds website for more information about this wonderful  (and
+cheap !) extension :
+www.dirtyminds.cpcscene.com
+
+
+(*IMPORTANT NOTE* : PC that doesn't have a Serial Port aren't to  be  ditched  :
+USB/Com adapters exist, making transfers possible ! The slow transfer  that  may
+have happened was a Windows strange behaviour, now corrected thanks to Grim).
+
+
+If you don't posess a CPCBooster, the Arkos ROM will surely remain  useful,  for
+WriteDSK, the  integrated  CRTC  test,  the  memory  monitoring  RSXs,  and  the
+AutoBoot!
+
+
+
+Let's have a little overview of the RSXs available in this ROM :
+- WriteDSK 1.2 : Allows you to transfer a DSK from a 720k MS  DOS  disc  to  the
+CPC. With a CPCBooster you can transfer it directly  from  the  PC,  at  a  much
+faster rate. On top of that, you can also transfer Parados discs, as the size is
+no more a problem !
+- ReadDSK 1.0 : Generates a DSK of the current CPC disc to the PC. All these old
+DOS tools can now be thrown to the  dustbin  !  Warning,  ReadDSK  requires  the
+CPCBooster.
+- GetFile / SendFile : Send any file, binaire, basic or ascii,  between  the  PC
+and the CPC ! Headers are detected and managed !
+- SetBoot : Defines a file as 'boot'. Once done, a simple CAT (+Shift)  on  your
+disc and the file will run automatically !
+- Load : Loads any file (including Ascii files !) anywhere in  memory,  with  no
+fear of 'memory full'. You can load in bank, even in C2 ! Coders know how useful
+it is...
+- Header : Always useful, gives the header of a file.
+- Burn : Now famous, this RSX writes a ROM into your Ramcard.
+- Memory : Dumps the memory into the screen.
+- View : Visualizes the memory  in  a  graphical  way,  as  it  is  possible  in
+Antoine's Super Monitor.
+
+*** NEW ***
+- SNArkos 1.4 : The developper's best friend ! Allows to transfer  any  SNApshot
+created on PC with an emulator, to the CPC ! Testing  your  latest  code  almost
+instantly on CPC will become a new habit ! Please read the other notice  to  get
+more information about it.
+
+
+If you're not satisfied with all this... Tell us what you  need  and  we'll  see
+what we can do :).
+
+
+
+PC Interface
+------------
+
+Before viewing in details what the RSXs can do, let's see how the  PC  interface
+is done to allow the transfers with the CPC Booster. Don't be afraid, it's  very
+sumple and will work with any release of Windows, XP included of course.
+
+Along with this kit is a little PC program, called 'AFT' (Arkos File  Transfer).
+You must run it before each transfer. In fact, just run it once, and let  it  in
+the background as long as you use your CPC.
+
+AFT works with the command line (I  didn't  say  MS  DOS  !  AFT  uses  Windows'
+standard functions), and run like this :
+AFT [/ComPort]
+
+The option [/ComPort] parameter tells with COM Port is used.  By  default,  it's
+the 1. If you need to use the 4, just type AFT /4. Simple, ain't it ?
+
+For simplicity's sake, it's advised to put AFT in a folder that is automatically
+'scanned', so that you can run it from whatever folder you are in. With XP,  you
+can add a 'PATH' to do so. In the Configuration Pannel /  System  /  Advanced  /
+Environment Variables, PATH Variable. Don't erase it ! Just add the folder where
+you've copied AFT. Copying AFT in the  Windows's  one  should  be  enough,  this
+folder being already pointed by the PATH variable.
+
+AFT only sees files of the current folder. Relative paths aren't  supported  for
+the moment.
+
+(nice tip : to run the command line from  the  Windows  Explorer,  in  a  chosen
+folder, run the Explorer / Tools / Folder options / File Type.  Select  'Folder'
+and 'Advanced', then 'New'. Type the action name (I chose 'Dos Prompt'), and  by
+Browsing, select  the  'cmd'  program  that  is  in  Windows/System32.  Now,  by
+right-clicking on a folder in the Folder area of the Explorer, you'll be able to
+'Dos Prompt' directly there. Ain't it cool ?)
+
+
+Once  started,  ADR  will  test  the  COM  port.  A  success  doesn't  mean  the
+communication with the CPC is done - it is tested when a RSX is run -  but  that
+the COM port is useable. The CPC can now give orders ! A '*' is written  at  any
+CPC command. A transfer end is noted, as well as critical errors  (can't  create
+PC files, file not found...). To quit AFT, use Crtl-C.
+
+If AFT is not started when a RSX does a request, there will be an error on  CPC.
+Don't worry, press space to try again.
+
+However, the non-detection of the CPCBooster by a RSX is critical. Don't  forget
+that you must NOT plug extensions while the computer is on. Turn it  off,  check
+your cables and plugs, turn on, and run the RSX.
+
+Last note, filenames given by the CPC are short, long names must be replaced  by
+the equivalent as short names (eg : thedem~1.dsk).
+
+
+
+Now, let's have a look into what the RSXs can do.
+
+WriteDSK and ReadDSK have their own notice, that you can find in this kit.
+
+
+
+GetFile
+-------
+|GF[A],"filename",[start],[exec]
+
+GetFile allows you to transfer a file from the PC to the CPC.  Run  AFT  in  the
+folder of the file(s) you want to transfer before all.
+When the file is found on the PC, the transfer begins. The CPC will tell you  if
+a AMSDOS header is found. Headers are useful, because they  tell  the  filetype,
+and the Start and Execution addresses. If no header is  found,  these  addresses
+are fixed to &4000, and the type to Binary.
+Use |GF will only create Binary or Basic file, according to the header. The  [A]
+parameter means  'Ascii',  and  will  force  the  creation  of  an  Ascii  file,
+headerless. If the PC file had a header, it will be ignored.
+Start and Exec parameters allow to force these addresses, regardless of what  is
+said in the header. Ascii files can't handle these parameters.
+
+Examples :
+|GF,"rotozoom.bin"
+|GF,"gfx.scr",&c000,0
+|GFA,"source.mxm"
+
+
+
+SendFile
+--------
+|SF[N],"filename"
+
+SendFile allows you to transfer files from the  CPC  to  the  PC.  The  transfer
+begins when the PC manages to create the file in the current folder. By default,
+the file is transfered with its header, or without if it's an Ascii file.
+The [N] option means 'No Header', and will remove the header if it exists.
+
+Examples :
+|SF,"waves.bas"
+|SFN,"precalcs.tab"
+
+
+
+
+
+SetBoot
+-------
+|SETBOOT,"filename",0/1
+
+Revolutionary RSX, SetBoot sets a 'bootable'  status  on  any  executable  file,
+whether it's Binary or Basic. Once a file is 'bootable',  just  type  CAT  (with
+Shift when pressing Enter) to see the program  start  !  Over  are  the  useless
+searches on a disc, looking for the executable of a game, tool or even demo !
+
+As you might guess, the Arkos Rom is necessary to boot.  What's  more,  the  Rom
+must be set to an inferior slot to the Disc Rom (Amsdos or Parados, generally in
+Rom 7). However, don't be afraid, the boot won't modify any byte in  your  file.
+It's completely safe ! For more technical information about the Autoboot, please
+refer to the end of this file.
+
+The 'filename' parameter defines the file to be set as boot. The last  parameter
+sets the Boot status (=1) or remove it (=  0).  This  doesn't  affect  the  file
+content. It is necessary to unprotect the disc for the setting operation  to  be
+successful.
+
+A simple 'CAT' will show the name of the boot file, if the  disc  have  one.  To
+Boot, type 'CAT', press Shift when pressing Enter and behold the miracle !
+
+Finally, note that, to boot, you must ONLY type CAT in direct mode (= not  in  a
+program),  with  no  instruction  behind.  Thus,  the  Boot  doesn't  harm   the
+functioning of any program, but remains handy for users !
+The Autoboot only works on DATA format, the most usual one (sectors &c1-&c9). If
+Setboot returns a 'file not found' but the file is given by CAT, this means  the
+format is  IBM,  SYSTEM  or  VENDOR.  If  some  users  requests  a  multi-format
+managment, then I'll see what I can do about it !
+
+
+Examples :
+|SETBOOT,"DIA",1
+|SETBOOT,"-ECOLE",0
+
+
+
+
+
+
+Load
+----
+|LD,"filename",[Address],[Bank],[AdBuffer]
+
+This RSX loads a file anywhere in memory. It  works  like  the  Basic  function,
+except that it won't give any Memory Full ! However, caution not  to  erase  any
+System area ! It also loads Ascii files...
+Unless [Address] is set, the file is loaded  according  to  its  Start  address,
+logically. If you load an Ascii file, Address is needed.
+
+The Bank parameter allows to load a file in a bank, like &C4-&C7, &C0,  or  more
+interestingly, in C2 (128k needed of course !). In this case,  it's  advised  to
+set Address. 0 will point at the beginning of &c4, &4000 in &c5,  &8000  in  &c6
+and &c000 in &c7. Of course, it's possible to load a file across several banks !
+Loading a file in #c2 is slower because done byte by byte. Can't  have  all  the
+advantages at once !
+
+The last parameter, ADBuffer, is an additional security to protect  the  memory.
+You must surely know that when you load a file, a 2kb (&800) buffer is  used  by
+the Amsdos, placed in Himem-&800. This himem depends on your Roms configuration,
+but can be set with the 'Memory' basic command. When you load  a  'normal'  file
+(binary/basic), this buffer is actually NOT  used,  so  don't  bother  with  it.
+However, it is required when loading a file byte by byte (loading an Ascii file,
+on in &c2). If you load an ascii file up  in  the  memory  (&a000),  it  may  be
+crushed by the buffer. In this case, move this one with ADBuffer.
+
+Finally, note that when you load a file in #c2, whatever type it is, the  buffer
+is set in the  first  64k  RAM,  because  I  open  a  bank  (&c4  to  &c7,  from
+&4000-&7fff) to load the bytes one by one. So, take care no to  set  the  buffer
+inside this area. As well, when you load an ascii file in  bank  (&c4-&c7),  the
+bank is opened, so take care of your buffer. But in a general  way,  the  buffer
+address doesn't need to be set.
+
+Last note, a bank given in parameter is not closed when the RSX  work  is  over,
+unless you opened &c2, in which case the bank is closed (&c0).
+
+
+Examples :
+|LD,"screen.scr"
+|LD,"screen.scr",&c000
+|LD,"ascii.txt",&4000,&c0,&c000
+|LD,"gfx.win",0,&c2
+
+
+
+
+Header
+------
+|HD,"filename"
+
+Very simple yet handy RSX, gives the filetype of the  file  (0  =Basic  2=Binary
+#16=Ascii), as well as the Start, Length  and  Execution  address.  Ascii  files
+don't have any of these.
+
+
+
+Burn
+----
+|BN,"filename",Rom
+
+Burn is a must have, for those tired of using the Ram7  tool,  lost  on  a  disc
+hidden somewhere... Enter the Rom filename, and the ROM where to  copy  it,  and
+Burn will do the job ! When the rom is  loaded,  set  the  Write  mode  of  your
+Ramcard to 1 and press space. When the copy is done, set it to 0. That's it !
+
+
+
+Memory
+------
+|MM,[Address]
+
+Simple and useful, Memory reads the memory and writes on  screen  the  bytes  in
+hexa as well as the ascii characters corresponding.  Address  is  optional,  but
+remains in memory, and is shared with |VW. Pressing a  key  Pauses/Restarts  the
+scrolling, Esc exits.
+
+
+
+
+View
+----
+|VW,[Address]
+
+Last RSX, but handy and rather cool :). View displays the memory as  the  window
+that you can resize. Very useful to find a lost graphic in memory, a font, or to
+rip sprites in a game. Once again, Address is optional but remains in memory.
+Here're the keys to have fun with :
+
+Up/down/left/right : expand/shrink the window size, vertically or horizontally.
+Control+Shift  +  Left/right  :  Expand/shrink   the   window   width   to   its
+minimum/maximum.
+Control/Shift + Left/right : Address decreases/increases. Visually, scrolls.
+Shift + Up/Down : Slow vertical motion.
+Control + Up/Down : Fast vertical motion.
+Control+Shift + Up/Down : One page vertical motion. Depends on the height of the
+window.
+0,1,2 : Changes mode.
+Space : Gives indications about the window : address, size, mode.
+Esc : Exit.
+
+
+
+
+
+
+---------------
+
+That's it !
+
+We hope that you'll appreciated this ROM, and that it will improve the  way  you
+use your CPC.
+
+
+Please also note that it's just a beginning, it's very  easy  to  integrate  AFT
+into any program (explorer-like, DSK Manager, or even an emulator !). If  you're
+a developper, don't hesitate  to  contact  us.  The  protocol  of  communication
+between the CPC and the PC is very simple, and easily useable in any program.
+
+
+SOME TECHNICAL NOTES :
+
+CPCBooster transfer :
+A transfer is done at 115200 Bauds (no Parity, 1 Bit Stop, 8 Bits Data). A  128k
+transfer takes about 12 seconds.
+
+
+AutoBoot :
+We're very proud of this feature :). The Arkos Rom must be placed below the Disc
+Rom, because our rom bypasses the RET in #BE7F, that  is  reinitialised  by  the
+Disc Rom. No worry, this RET is made for this. All CAS vectors make a call  here
+when executed or over. What our Rom does, is just add a little code  there  that
+tests the Word in #40 (where the direct Basic  line  is  coded).  If  the  'CAT'
+token, followed by a '0' (end of line) are found, then the Boot can begin.  This
+token is erased so that a boot doesn't happen twice without  be  asked  to.  The
+Boot flag is written in the file declaration (the first  one,  if  the  file  is
+bigger than 16k), at the 13th byte (unused). Setting #AA there activates Boot, 0
+(or anything else) deactivates it.
+
+When the boot is run, it loads the &c1-&c4 sectors of the directory, looking for
+a bootable file, thanks to the 13th byte of their declaration.  If  no  bootable
+file is found, a RET is performed so that the CAT can continue normally. In  the
+opposite case, is Shift is not pressed, the Boot filename is  written,  and  the
+CAT executed normally. If Shift is pressed, the file is executed through a  RUN,
+with exactly the same command as in Basic, thus allowing a  full  compatibility,
+and the execution of Binary as well as Basic files.
+
+If the &c1-&c4 sectors aren't found, then the CAT performs normally. This allows
+some Parados discs to Boot (the ones with 64 entries), and avoid errors  if  the
+format is unknown.
+
+Rather cool, huh ? :)
+
+
+
+
+If you've any remarks, suggestions about this Rom, write us here :
+targhan@cpcscene.com
+grim@cpcscene.com
+
+Visit the Arkos website to download our productions :
+www.arkos.cpcscene.com
+
+And here's the Dirty Minds site to order your future CPCBooster :
+www.dirtyminds.cpcscene.com
+
+
+
+
+See you soon !
+The Arkos Team.
