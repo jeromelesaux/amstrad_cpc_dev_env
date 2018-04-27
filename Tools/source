@@ -1,0 +1,2 @@
+CURRENT_PATH=`"$(cd "$(dirname ".")" && pwd)/$(basename ".")"`
+export PATH=$CURRENT_PATH/bin/:$PATH
