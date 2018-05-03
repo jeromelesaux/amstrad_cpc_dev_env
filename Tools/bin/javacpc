@@ -1,5 +1,6 @@
 #! /bin/bash 
+echo "dsk to open $1"
 APPDIR=$(dirname $0)
 echo "calling java -jar $APPDIR/../JavaCPC_Desktop_2/JavaCPC.jar"
 cd $APPDIR/../JavaCPC_Desktop_2
-java -jar JavaCPC.jar
+java -jar JavaCPC.jar --df0 "$1"
