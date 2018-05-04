@@ -1,6 +1,22 @@
 
 /* FILE.C */
-/* Version 1.0 */
+/* add get current drive in memory */ 
+/* Version 1.1 */
+
+initamsdos() {
+#asm
+	ld hl,(&be7d); recup du numero de lecteur dans a
+	ld a,(hl)
+	push af
+	ld c,7 ; init rom 7
+	ld de,&40
+	ld hl,&abff
+	call &bcce
+	pop af
+	ld hl,(&be7d) ; restit du numero de lecteur
+	ld (hl),a
+#endasm
+}
 
 openread(filename,readbuffer) 
 	char *filename;
@@ -15,7 +31,7 @@ openread(filename,readbuffer)
 	push bc
 
 	call getfilenamesize
-
+	
 	call &bc77
 	jr nc, openreadfail
 
