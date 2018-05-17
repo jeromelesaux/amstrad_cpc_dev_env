@@ -1,34 +1,38 @@
-package main 
+package main
 
 import (
-    "fmt"
 	"flag"
-	"strconv"
+	"fmt"
 	"os"
-	"encoding/hex"
+	"strconv"
+	"math/big"
 )
 
-var decValue = flag.String("dec","","decimal value to convert into hexadecimal")
-var hexaValue = flag.String("hex","","hexadecimal value to convert into decimal")
+var decValue = flag.String("dec", "", "decimal value to convert into hexadecimal")
+var hexaValue = flag.String("hex", "", "hexadecimal value to convert into decimal")
 
 func main() {
 	flag.Parse()
-
+	var value string
 	if *decValue != "" {
-		v,err  := strconv.Atoi(*decValue)
+
+		if (*decValue)[0] == '-' {
+			value = (*decValue)[1:]
+		} else {
+			value = (*decValue)[0:]
+		}
+		v, err := strconv.Atoi(value)
 		if err != nil {
-			fmt.Fprintf(os.Stderr,"cannot not parse value %v with error %v",*decValue,err)
+			fmt.Fprintf(os.Stderr, "cannot not parse value %v with error %v", value, err)
 			return
 		}
-		fmt.Printf("%x",v)
+		fmt.Printf("%x", v)
 	} else {
+
 		if *hexaValue != "" {
-			b,err := hex.DecodeString(*hexaValue)
-			if err != nil {
-				fmt.Fprintf(os.Stderr,"cannot not parse value %v with error %v",*hexaValue,err)
-				return
-			}
-			fmt.Printf("%d",b[0])
+			v := new(big.Int)
+			fmt.Sscanf(*hexaValue,"%x",v)
+			fmt.Printf("%d",v)
 		} else {
 			flag.PrintDefaults()
 		}
